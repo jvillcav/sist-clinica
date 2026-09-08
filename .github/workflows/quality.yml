@@ -1,0 +1,43 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [backend-clinica, frontend-clinica]
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ${{ matrix.project }}/.nvmrc
+          cache: npm
+          cache-dependency-path: ${{ matrix.project }}/package-lock.json
+      - run: npm ci
+      - run: npm run check
+        env:
+          MONGO_URI: mongodb://127.0.0.1:27017/sist-clinica-test
+          JWT_SECRET: test_secret_with_at_least_32_characters
+
+  ml:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend-clinica/ml-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: backend-clinica/ml-service/.python-version
+          cache: pip
+          cache-dependency-path: backend-clinica/ml-service/requirements.txt
+      - run: pip install --requirement requirements.txt
+      - run: python -m compileall -q app.py tests
+      - run: python -m unittest discover -s tests -v

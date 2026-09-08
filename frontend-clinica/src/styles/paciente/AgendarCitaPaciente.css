@@ -1,0 +1,516 @@
+.patient-booking-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.booking-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 18px;
+  margin: 32px 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #94a3b8;
+  font-weight: 800;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.step:hover {
+  transform: translateY(-2px);
+  color: #2563eb;
+}
+
+.step strong {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #64748b;
+  display: grid;
+  place-items: center;
+}
+
+.step.active strong {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.24);
+  animation: pulseStep 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseStep {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.step.active {
+  color: #2563eb;
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.booking-card,
+.doctor-booking-card,
+.booking-date-card,
+.booking-hours-card,
+.booking-confirm-card {
+  background: linear-gradient(145deg, #ffffff, #f8fbff);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.booking-card:hover,
+.doctor-booking-card:hover,
+.booking-date-card:hover,
+.booking-hours-card:hover,
+.booking-confirm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.16);
+  border-color: #93c5fd;
+  background: linear-gradient(145deg, #ffffff, #eef6ff);
+}
+
+.booking-card {
+  padding: 32px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.booking-card h3 {
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.booking-card p {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.selected-info {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 18px;
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+.doctor-booking-card {
+  padding: 26px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.doctor-booking-card h3 {
+  margin-bottom: 4px;
+}
+
+.doctor-booking-card p {
+  color: #64748b;
+}
+
+.booking-time-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 20px;
+}
+
+.booking-date-card,
+.booking-hours-card,
+.booking-confirm-card {
+  padding: 26px;
+}
+
+.booking-date-card label {
+  display: block;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.booking-date-card input {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 0 14px;
+  font-size: 16px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.booking-date-card input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+.booking-hours-card h3 {
+  margin-bottom: 16px;
+}
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hour-btn {
+  min-height: 58px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.hour-btn strong {
+  font-size: 16px;
+}
+
+.hour-btn span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.hour-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 16px rgba(37, 99, 235, 0.12);
+}
+
+.hour-btn.selected {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  border-color: #2563eb;
+  box-shadow: 0 12px 20px rgba(37, 99, 235, 0.2);
+}
+
+.hour-btn.selected span {
+  color: white;
+}
+
+.hour-btn.disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.hour-btn.disabled span {
+  color: #ef4444;
+}
+
+.booking-confirm-card {
+  max-width: 620px;
+}
+
+.booking-confirm-card h2 {
+  margin-bottom: 18px;
+}
+
+.booking-confirm-card p {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+}
+
+.booking-confirm-card span {
+  color: #64748b;
+}
+
+.booking-confirm-card textarea {
+  width: 100%;
+  min-height: 120px;
+  margin-top: 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 16px;
+  resize: vertical;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.booking-confirm-card textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.form-actions button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.form-actions button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(37, 99, 235, 0.2);
+  background: #1d4ed8;
+}
+
+.form-actions button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.form-actions .btn-cancel,
+.btn-cancel {
+  background: #64748b;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .booking-grid,
+  .booking-time-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hours-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.booking-card {
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.service-icon{
+    width:70px;
+    height:70px;
+    border-radius:20px;
+    background:#eff6ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:36px;
+}
+
+.booking-card h3{
+    margin:0;
+    text-align:center;
+    color:#1e293b;
+    font-size:20px;
+    font-weight:700;
+}
+
+.booking-card:hover .service-icon{
+    background:#2563eb;
+    color:white;
+    transform:scale(1.08);
+    transition:.25s;
+}
+
+.booking-card:hover h3{
+    color:#2563eb;
+}
+
+/* ============================= */
+/* BOTONES DEL ASISTENTE DE CITAS */
+/* ============================= */
+
+.wizard-actions{
+    margin-top:40px;
+    display:flex;
+    justify-content:flex-start;
+}
+
+.btn-back{
+    border:none;
+    background:#eef4ff;
+    color:#2563eb;
+    padding:12px 24px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-back:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+.booking-confirm-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 22px;
+  align-items: start;
+}
+
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 0;
+}
+
+.confirm-row span {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.confirm-row strong {
+  text-align: right;
+  color: #0f172a;
+}
+
+.booking-warning {
+  margin-top: 16px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 14px;
+  padding: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.booking-side-summary {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 18px 35px rgba(37, 99, 235, 0.25);
+  position: sticky;
+  top: 110px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.booking-side-summary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px rgba(37, 99, 235, 0.32);
+}
+
+.summary-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.18);
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.booking-side-summary h3 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.booking-side-summary p,
+.booking-side-summary span {
+  display: block;
+  opacity: 0.95;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.booking-side-summary strong {
+  display: block;
+  font-size: 34px;
+  margin-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .booking-confirm-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-side-summary {
+    position: static;
+  }
+}
+
+/* ========================================= */
+/* MIS CITAS DEL PACIENTE                    */
+/* ========================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.patient-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #2563eb;
+  background: #dbeafe;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+}

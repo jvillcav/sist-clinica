@@ -1,0 +1,449 @@
+/* =====================================================
+   NAVBAR PÚBLICO - CLÍNICA ORELLANA
+===================================================== */
+
+.public-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 0 30px;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.public-navbar--scrolled {
+  background: rgba(255, 255, 255, 0.99);
+  box-shadow: 0 10px 30px rgba(20, 57, 120, 0.14);
+}
+
+.public-navbar__container {
+  width: min(100%, 1500px);
+  min-height: 90px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns:
+    minmax(300px, 1fr)
+    auto
+    minmax(210px, 1fr);
+  align-items: center;
+  column-gap: 28px;
+  transition: min-height 0.3s ease;
+}
+
+.public-navbar--scrolled .public-navbar__container {
+  min-height: 78px;
+}
+
+/* MARCA Y LOGO */
+
+.public-navbar__brand {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: #132e57;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.public-navbar__brand:hover {
+  transform: translateY(-2px);
+}
+
+.public-navbar__logo {
+  width: 96px;
+  height: 76px;
+  display: block;
+  object-fit: contain;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    transform 0.3s ease;
+}
+
+.public-navbar__brand:hover .public-navbar__logo {
+  transform: rotate(-2deg) scale(1.04);
+}
+
+.public-navbar--scrolled .public-navbar__logo {
+  width: 84px;
+  height: 66px;
+}
+
+.public-navbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.public-navbar__brand-text strong {
+  color: #15213a;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.public-navbar__brand-text small {
+  margin-top: 7px;
+  color: #3c6cff;
+  font-size: 0.83rem;
+  font-weight: 500;
+}
+
+/* MENÚ CENTRAL */
+
+.public-navbar__menu {
+  justify-self: center;
+}
+
+.public-navbar__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 2.2vw, 42px);
+}
+
+.public-navbar__link {
+  position: relative;
+  padding: 17px 0;
+  color: #273248;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.public-navbar__link::after {
+  content: '';
+  position: absolute;
+  right: 50%;
+  bottom: 9px;
+  left: 50%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #316bff, #47a7ff);
+  box-shadow: 0 2px 7px rgba(49, 107, 255, 0.3);
+  transition:
+    right 0.28s ease,
+    left 0.28s ease;
+}
+
+.public-navbar__link:hover {
+  color: #316bff;
+  transform: translateY(-3px);
+}
+
+.public-navbar__link:hover::after,
+.public-navbar__link--active::after {
+  right: 0;
+  left: 0;
+}
+
+.public-navbar__link--active {
+  color: #316bff;
+  animation: navbar-jump 0.45s ease;
+}
+
+/* TELÉFONO */
+
+.public-navbar__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #316bff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.public-navbar__phone--desktop {
+  justify-self: end;
+}
+
+.public-navbar__phone--mobile {
+  display: none;
+}
+
+.public-navbar__phone span {
+  font-size: 1.05rem;
+}
+
+.public-navbar__phone:hover {
+  color: #164dbd;
+  transform: translateY(-2px);
+}
+
+/* BOTÓN HAMBURGUESA */
+
+.public-navbar__toggle {
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid rgba(49, 107, 255, 0.18);
+  border-radius: 11px;
+  background: #f1f6ff;
+  box-shadow: 0 6px 17px rgba(37, 99, 235, 0.12);
+}
+
+.public-navbar__toggle span {
+  width: 21px;
+  height: 2px;
+  border-radius: 5px;
+  background: #285ebc;
+  transition:
+    transform 0.3s ease,
+    opacity 0.25s ease;
+}
+
+.public-navbar__toggle--open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.public-navbar__toggle--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.public-navbar__toggle--open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ANIMACIÓN DEL ENLACE SELECCIONADO */
+
+@keyframes navbar-jump {
+  0% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(-6px);
+  }
+
+  70% {
+    transform: translateY(1px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* PANTALLAS MEDIANAS */
+
+@media (max-width: 1320px) {
+  .public-navbar {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .public-navbar__container {
+    grid-template-columns:
+      minmax(265px, 1fr)
+      auto
+      minmax(175px, 1fr);
+    column-gap: 18px;
+  }
+
+  .public-navbar__logo {
+    width: 78px;
+    height: 68px;
+  }
+
+  .public-navbar__brand-text strong {
+    font-size: 1.25rem;
+  }
+
+  .public-navbar__brand-text small {
+    font-size: 0.72rem;
+  }
+
+  .public-navbar__links {
+    gap: 20px;
+  }
+
+  .public-navbar__link {
+    font-size: 0.79rem;
+  }
+
+  .public-navbar__phone {
+    font-size: 0.8rem;
+  }
+}
+
+/* TABLET Y MENÚ MÓVIL */
+
+@media (max-width: 1100px) {
+  .public-navbar__container {
+    position: relative;
+    min-height: 78px;
+    display: flex;
+  }
+
+  .public-navbar__toggle {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .public-navbar__phone--desktop {
+    display: none;
+  }
+
+  .public-navbar__menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: 0;
+    max-height: calc(100dvh - 105px);
+    padding: 17px;
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(49, 107, 255, 0.13);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.99);
+    box-shadow: 0 22px 50px rgba(20, 57, 120, 0.2);
+    transform: translateY(-12px) scale(0.98);
+    transform-origin: top;
+    transition:
+      visibility 0.25s ease,
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .public-navbar__menu--open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .public-navbar__links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .public-navbar__link {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+
+  .public-navbar__link:hover,
+  .public-navbar__link--active {
+    background: #f1f6ff;
+  }
+
+  .public-navbar__link::after {
+    top: 20%;
+    right: auto;
+    bottom: 20%;
+    left: 5px;
+    width: 3px;
+    height: auto;
+  }
+
+  .public-navbar__link:hover::after,
+  .public-navbar__link--active::after {
+    right: auto;
+    left: 5px;
+  }
+
+  .public-navbar__phone--mobile {
+    margin-top: 10px;
+    padding: 14px 16px;
+    display: flex;
+    border-radius: 10px;
+    background: #f1f6ff;
+  }
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .public-navbar {
+    padding: 7px 13px;
+  }
+
+  .public-navbar__container,
+  .public-navbar--scrolled .public-navbar__container {
+    min-height: 63px;
+  }
+
+  .public-navbar__brand {
+    gap: 9px;
+  }
+
+  .public-navbar__logo,
+  .public-navbar--scrolled .public-navbar__logo {
+    width: 61px;
+    height: 55px;
+  }
+
+  .public-navbar__brand-text strong {
+    font-size: 1rem;
+  }
+
+  .public-navbar__brand-text small {
+    margin-top: 5px;
+    font-size: 0.59rem;
+  }
+
+  .public-navbar__toggle {
+    width: 41px;
+    height: 41px;
+  }
+
+  .public-navbar__menu {
+    top: calc(100% + 8px);
+    padding: 13px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 390px) {
+  .public-navbar__brand-text small {
+    display: none;
+  }
+}
+
+/* ACCESIBILIDAD */
+
+.public-navbar a:focus-visible,
+.public-navbar button:focus-visible {
+  outline: 3px solid rgba(49, 107, 255, 0.45);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-navbar *,
+  .public-navbar *::before,
+  .public-navbar *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

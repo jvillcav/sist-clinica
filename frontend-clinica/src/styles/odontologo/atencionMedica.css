@@ -1,0 +1,1084 @@
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+
+.attention-page {
+  width: 100%;
+  color: #0f172a;
+}
+
+.attention-page *,
+.attention-page *::before,
+.attention-page *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.attention-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.attention-eyebrow {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.attention-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.12;
+}
+
+.attention-header p {
+  max-width: 720px;
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.attention-doctor {
+  min-width: 235px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #eff6ff;
+  padding: 14px 17px;
+}
+
+.attention-doctor span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.attention-doctor strong {
+  display: block;
+  margin-top: 5px;
+  color: #1d4ed8;
+  font-size: 15px;
+}
+
+/* =====================================================
+   MENSAJES
+===================================================== */
+
+.attention-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  border-radius: 13px;
+  padding: 14px 17px;
+  margin-bottom: 18px;
+  font-weight: 750;
+}
+
+.attention-message svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-message.success {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.attention-message.error {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* =====================================================
+   PASOS
+===================================================== */
+
+.attention-stepper {
+  display: grid;
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(60px, 0.45fr)
+    minmax(170px, 1fr)
+    minmax(60px, 0.45fr)
+    minmax(210px, 1fr);
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.attention-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #94a3b8;
+}
+
+.attention-step-circle {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  font-weight: 900;
+}
+
+.attention-step-circle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-step strong {
+  display: block;
+  color: inherit;
+  font-size: 14px;
+}
+
+.attention-step small {
+  display: block;
+  margin-top: 3px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.attention-step.active {
+  color: #2563eb;
+}
+
+.attention-step.active .attention-step-circle {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 7px 17px rgba(37, 99, 235, 0.22);
+}
+
+.attention-step.completed {
+  color: #16a34a;
+}
+
+.attention-step.completed .attention-step-circle {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.attention-step-line {
+  height: 3px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  margin: 0 14px;
+}
+
+.attention-step-line.completed {
+  background: #22c55e;
+}
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.attention-panel {
+  border: 1px solid #e2e8f0;
+  border-radius: 21px;
+  background: #ffffff;
+  padding: 27px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.065);
+}
+
+.attention-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 20px;
+  margin-bottom: 22px;
+}
+
+.attention-panel-header > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.attention-panel-header > div > svg {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-panel-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.attention-panel-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+}
+
+/* =====================================================
+   PASO 1
+===================================================== */
+
+.attention-patient-search {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 13px;
+  padding: 0 15px;
+  margin-bottom: 18px;
+}
+
+.attention-patient-search:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.11);
+}
+
+.attention-patient-search svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: #94a3b8;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-patient-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #0f172a;
+  font: inherit;
+}
+
+.attention-selected-patient {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #bfdbfe;
+  border-radius: 15px;
+  background: #eff6ff;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.attention-patient-avatar {
+  width: 49px;
+  height: 49px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.attention-patient-avatar.selected {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.attention-selected-patient-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.attention-selected-patient-main h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.attention-selected-patient-main p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.attention-selected-patient-main > span {
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.attention-linked-appointment {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-left: 1px solid #bfdbfe;
+  padding-left: 17px;
+}
+
+.attention-linked-appointment svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: #2563eb;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-linked-appointment small,
+.attention-linked-appointment strong {
+  display: block;
+}
+
+.attention-linked-appointment small {
+  color: #64748b;
+}
+
+.attention-linked-appointment strong {
+  margin-top: 3px;
+  font-size: 13px;
+}
+
+.attention-patient-alerts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-bottom: 18px;
+}
+
+.attention-patient-alerts article {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 13px;
+  padding: 13px;
+}
+
+.attention-patient-alerts article svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-patient-alerts article strong {
+  display: block;
+  font-size: 13px;
+}
+
+.attention-patient-alerts article p {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+.attention-patient-alerts .allergies {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.attention-patient-alerts .conditions {
+  border: 1px solid #fed7aa;
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.attention-patient-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-height: 465px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.attention-patient-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 14px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.attention-patient-card:hover {
+  transform: translateY(-2px);
+  border-color: #bfdbfe;
+  background: #f8fbff;
+}
+
+.attention-patient-card.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.attention-patient-card-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.attention-patient-card-info strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.attention-patient-card-info span {
+  display: block;
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.attention-patient-card-status {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* =====================================================
+   PASO 2
+===================================================== */
+
+.attention-patient-banner {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-radius: 14px;
+  background: #eff6ff;
+  padding: 14px 16px;
+  margin-bottom: 22px;
+}
+
+.attention-patient-banner strong,
+.attention-patient-banner span {
+  display: block;
+}
+
+.attention-patient-banner span {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.attention-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.attention-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attention-field.full {
+  grid-column: 1 / -1;
+}
+
+.attention-field > span {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.attention-field input,
+.attention-field select,
+.attention-field textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 12px 14px;
+  font: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.attention-field input,
+.attention-field select {
+  min-height: 49px;
+}
+
+.attention-field textarea {
+  min-height: 115px;
+  resize: vertical;
+}
+
+.attention-field input:focus,
+.attention-field select:focus,
+.attention-field textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.11);
+}
+
+/* =====================================================
+   PASO 3
+===================================================== */
+
+.attention-final-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 25px;
+}
+
+.attention-treatment-column,
+.attention-supplies-column {
+  min-width: 0;
+}
+
+.attention-treatment-column h3,
+.attention-supplies-column h3 {
+  margin: 0 0 18px;
+  font-size: 18px;
+}
+
+.attention-treatment-column {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.attention-supplies-column {
+  border-left: 1px solid #e2e8f0;
+  padding-left: 25px;
+}
+
+.attention-supply-picker { position: relative; }
+.attention-supply-search { min-height: 49px; display: flex; align-items: center; gap: 10px; border: 1px solid #cbd5e1; border-radius: 12px; background: #fff; padding: 0 13px; }
+.attention-supply-search:focus-within { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, .11); }
+.attention-supply-search svg { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: #94a3b8; stroke-width: 1.9; }
+.attention-supply-search input { min-height: 47px; border: 0; outline: 0; box-shadow: none !important; padding: 0; }
+.attention-supply-results { position: absolute; z-index: 20; top: calc(100% + 6px); right: 0; left: 0; max-height: 280px; overflow-y: auto; border: 1px solid #cbd5e1; border-radius: 12px; background: #fff; padding: 6px; box-shadow: 0 15px 32px rgba(15, 23, 42, .16); }
+.attention-supply-results button { width: 100%; display: flex; justify-content: space-between; gap: 14px; border: 0; border-radius: 9px; background: transparent; padding: 10px 11px; color: #0f172a; text-align: left; cursor: pointer; }
+.attention-supply-results button:hover { background: #eff6ff; color: #1d4ed8; }
+.attention-supply-results button span { font-size: 13px; font-weight: 750; }
+.attention-supply-results button small { flex-shrink: 0; color: #64748b; font-size: 11px; }
+.attention-supply-results p { margin: 0; padding: 18px 12px; color: #64748b; text-align: center; font-size: 13px; }
+
+.attention-supply-add-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 11px;
+  margin-top: 15px;
+}
+
+.attention-add-supply {
+  min-height: 49px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: none;
+  border-radius: 11px;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.attention-add-supply:hover {
+  background: #1d4ed8;
+}
+
+.attention-add-supply svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-stock-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 11px;
+  background: #f0fdf4;
+  color: #15803d;
+  padding: 11px 13px;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.attention-selected-supplies {
+  border-radius: 14px;
+  background: #f8fafc;
+  padding: 15px;
+  margin-top: 17px;
+}
+
+.attention-selected-supplies > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.attention-selected-supplies h4 {
+  margin: 0;
+}
+
+.attention-selected-supplies > header span {
+  min-width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.attention-no-supplies {
+  border: 1px dashed #cbd5e1;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #64748b;
+  padding: 18px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.attention-supply-item {
+  display: grid;
+  grid-template-columns: 1fr 72px 38px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #ffffff;
+  padding: 11px;
+}
+
+.attention-supply-item + .attention-supply-item {
+  margin-top: 9px;
+}
+
+.attention-supply-item strong,
+.attention-supply-item span {
+  display: block;
+}
+
+.attention-supply-item strong {
+  font-size: 13px;
+}
+
+.attention-supply-item span {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.attention-supply-item input {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 6px;
+  text-align: center;
+}
+
+.attention-supply-item button {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 9px;
+  background: #fee2e2;
+  color: #b91c1c;
+  cursor: pointer;
+}
+
+.attention-supply-item button:hover {
+  background: #fecaca;
+}
+
+.attention-supply-item button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =====================================================
+   RESUMEN
+===================================================== */
+
+.attention-summary {
+  border: 1px solid #dbeafe;
+  border-radius: 15px;
+  background: #f8fbff;
+  padding: 19px;
+  margin-top: 24px;
+}
+
+.attention-summary > header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.attention-summary h3 {
+  margin: 0;
+}
+
+.attention-summary header span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.attention-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.attention-summary-grid article {
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 12px;
+}
+
+.attention-summary-grid article.wide {
+  grid-column: span 2;
+}
+
+.attention-summary-grid span {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.attention-summary-grid strong {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+.attention-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 11px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 21px;
+  margin-top: 24px;
+}
+
+.attention-button {
+  min-height: 47px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 11px;
+  padding: 0 18px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.attention-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.attention-button.primary {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.attention-button.primary:hover {
+  background: #1d4ed8;
+}
+
+.attention-button.secondary {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+}
+
+.attention-button.secondary:hover {
+  background: #f8fafc;
+}
+
+.attention-button.save {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+}
+
+.attention-button.save:hover {
+  background: #1d4ed8;
+}
+
+.attention-button:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   CARGA
+===================================================== */
+
+.attention-loading {
+  min-height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.attention-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: attention-spin 0.8s linear infinite;
+}
+
+.attention-loading h2 {
+  margin: 18px 0 7px;
+}
+
+.attention-loading p {
+  margin: 0;
+  color: #64748b;
+}
+
+@keyframes attention-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1050px) {
+  .attention-stepper {
+    grid-template-columns:
+      1fr
+      45px
+      1fr
+      45px
+      1fr;
+  }
+
+  .attention-step small {
+    display: none;
+  }
+
+  .attention-final-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attention-supplies-column {
+    border-left: none;
+    border-top: 1px solid #e2e8f0;
+    padding-left: 0;
+    padding-top: 23px;
+  }
+}
+
+@media (max-width: 760px) {
+  .attention-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .attention-doctor {
+    width: 100%;
+  }
+
+  .attention-stepper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .attention-step {
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .attention-step-line {
+    flex: 0 0 40px;
+    margin-top: 20px;
+  }
+
+  .attention-step strong {
+    font-size: 12px;
+  }
+
+  .attention-selected-patient {
+    grid-template-columns: auto 1fr;
+  }
+
+  .attention-linked-appointment {
+    grid-column: 1 / -1;
+    border-left: none;
+    border-top: 1px solid #bfdbfe;
+    padding-left: 0;
+    padding-top: 12px;
+  }
+
+  .attention-selected-patient-main {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .attention-patient-alerts,
+  .attention-patient-list,
+  .attention-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .attention-summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .attention-summary-grid article.wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 540px) {
+  .attention-panel {
+    padding: 18px;
+  }
+
+  .attention-stepper {
+    overflow-x: auto;
+    padding-bottom: 7px;
+  }
+
+  .attention-step {
+    min-width: 90px;
+  }
+
+  .attention-step-line {
+    flex-basis: 24px;
+  }
+
+  .attention-supply-add-row {
+    grid-template-columns: 1fr;
+  }
+
+  .attention-add-supply {
+    width: 100%;
+  }
+
+  .attention-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attention-summary-grid article.wide {
+    grid-column: auto;
+  }
+
+  .attention-summary > header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .attention-navigation {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .attention-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attention-spinner {
+    animation: none;
+  }
+}

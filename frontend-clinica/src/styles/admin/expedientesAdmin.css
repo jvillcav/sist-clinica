@@ -1,0 +1,1165 @@
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.admin-records-page {
+  width: 100%;
+  color: #0f172a;
+}
+
+.admin-records-page *,
+.admin-records-page *::before,
+.admin-records-page *::after {
+  box-sizing: border-box;
+}
+
+.admin-records-page button,
+.admin-records-page input,
+.admin-records-page select,
+.admin-records-page textarea {
+  font: inherit;
+}
+
+.admin-records-page svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.admin-records-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 23px;
+}
+
+.admin-records-eyebrow {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.admin-records-header h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+}
+
+.admin-records-header p {
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.admin-records-refresh {
+  min-height: 47px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #bfdbfe;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #2563eb;
+  padding: 0 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.admin-records-refresh:hover {
+  background: #eff6ff;
+}
+
+.admin-records-refresh svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* =====================================================
+   MENSAJES
+===================================================== */
+
+.admin-records-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 13px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  font-weight: 750;
+}
+
+.admin-records-message svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.admin-records-message.success {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.admin-records-message.error {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* =====================================================
+   INDICADORES
+===================================================== */
+
+.admin-records-summary {
+  display: grid;
+  grid-template-columns: repeat(
+    6,
+    minmax(0, 1fr)
+  );
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.admin-records-summary article {
+  min-height: 154px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  border: 1px solid #e2e8f0;
+  border-radius: 17px;
+  background: #ffffff;
+  padding: 17px 14px;
+  text-align: center;
+  box-shadow: 0 7px 19px rgba(15, 23, 42, 0.05);
+}
+
+.admin-records-summary article div {
+  width: 100%;
+  min-width: 0;
+}
+
+.admin-records-summary span {
+  display: block;
+  min-height: 2.5em;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.admin-records-summary strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.admin-records-summary article > svg {
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  order: -1;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.admin-records-summary .total {
+  color: #2563eb;
+}
+
+.admin-records-summary .total > svg {
+  background: #eff6ff;
+}
+
+.admin-records-summary .active {
+  color: #16a34a;
+}
+
+.admin-records-summary .active > svg {
+  background: #f0fdf4;
+}
+
+.admin-records-summary .patients {
+  color: #7c3aed;
+}
+
+.admin-records-summary .patients > svg {
+  background: #f5f3ff;
+}
+
+.admin-records-summary .month {
+  color: #0891b2;
+}
+
+.admin-records-summary .month > svg {
+  background: #ecfeff;
+}
+
+.admin-records-summary .dentists {
+  color: #ea580c;
+}
+
+.admin-records-summary .dentists > svg {
+  background: #fff7ed;
+}
+
+.admin-records-summary .cancelled {
+  color: #dc2626;
+}
+
+.admin-records-summary .cancelled > svg {
+  background: #fef2f2;
+}
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.admin-records-toolbar {
+  display: grid;
+  grid-template-columns:
+    minmax(330px, 1fr)
+    minmax(160px, 220px)
+    minmax(135px, 180px)
+    minmax(140px, 180px)
+    minmax(140px, 180px);
+  align-items: end;
+  gap: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 17px;
+  background: #ffffff;
+  padding: 18px;
+  margin-bottom: 22px;
+  box-shadow: 0 7px 20px rgba(15, 23, 42, 0.045);
+}
+
+.admin-records-toolbar label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admin-records-toolbar label > span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.records-search > div {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  padding: 0 13px;
+}
+
+.records-search > div:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.records-search svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #64748b;
+}
+
+.records-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #0f172a;
+}
+
+.admin-records-toolbar select,
+.admin-records-toolbar > label > input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  outline: none;
+  background: #ffffff;
+  padding: 0 12px;
+}
+
+.admin-records-toolbar select:focus,
+.admin-records-toolbar > label > input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* =====================================================
+   LISTADO
+===================================================== */
+
+.admin-records-list-card {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 9px 26px rgba(15, 23, 42, 0.055);
+}
+
+.admin-records-list-card > header {
+  border-bottom: 1px solid #e2e8f0;
+  background: #fbfdff;
+  padding: 21px 23px;
+}
+
+.admin-records-list-card header span {
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-records-list-card header h2 {
+  margin: 5px 0 0;
+  font-size: 20px;
+}
+
+.admin-records-list-card header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.admin-records-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-records-table {
+  width: 100%;
+  min-width: 1180px;
+  border-collapse: collapse;
+}
+
+.admin-records-table th {
+  background: #f8fafc;
+  color: #475569;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-records-table td {
+  max-width: 240px;
+  border-top: 1px solid #e2e8f0;
+  padding: 15px 16px;
+  vertical-align: middle;
+}
+
+.admin-records-table tbody tr:hover {
+  background: #fbfdff;
+}
+
+.record-patient {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.record-patient > span {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.record-patient strong,
+.record-patient small,
+.record-date strong,
+.record-date small {
+  display: block;
+}
+
+.record-patient strong,
+.record-date strong {
+  font-size: 13px;
+}
+
+.record-patient small,
+.record-date small {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.record-clinical-text {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: #334155;
+  font-size: 12px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* compatibilidad estándar */
+}
+
+.record-status {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.record-status.activo {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.record-status.anulado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.record-view-button {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #bfdbfe;
+  border-radius: 9px;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 0 11px;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.record-view-button:hover {
+  background: #dbeafe;
+}
+
+.record-view-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.record-view-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.admin-records-empty {
+  min-height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 35px;
+  text-align: center;
+}
+
+.admin-records-empty > svg {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 15px;
+}
+
+.admin-records-empty h3 {
+  margin: 17px 0 7px;
+}
+
+.admin-records-empty p {
+  max-width: 440px;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.record-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1900;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.58);
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.record-modal-overlay.elevated {
+  z-index: 2000;
+}
+
+.record-modal {
+  width: min(860px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 28px 75px rgba(15, 23, 42, 0.26);
+}
+
+.record-modal.small {
+  width: min(590px, 100%);
+}
+
+.record-modal > header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fbfdff;
+  padding: 22px 24px;
+}
+
+.record-modal header div > span {
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.record-modal header h2 {
+  margin: 6px 0 0;
+  font-size: 23px;
+}
+
+.record-modal header p {
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.record-modal header > button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+}
+
+.record-modal header > button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.record-modal-content {
+  padding: 24px;
+}
+
+.record-person-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.record-person-avatar {
+  width: 67px;
+  height: 67px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.record-person-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.record-person-card p {
+  margin: 5px 0 9px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.record-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.record-info-grid article {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 14px;
+}
+
+.record-info-grid span,
+.record-info-grid strong {
+  display: block;
+}
+
+.record-info-grid span {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.record-info-grid strong {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.record-clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+  margin-top: 19px;
+}
+
+.record-clinical-grid article {
+  border: 1px solid #dbeafe;
+  border-radius: 13px;
+  background: #f8fbff;
+  padding: 16px;
+}
+
+.record-clinical-grid h4,
+.record-observations h4,
+.record-supplies h4,
+.record-cancellation-info h4 {
+  margin: 0 0 9px;
+}
+
+.record-clinical-grid p,
+.record-observations p,
+.record-cancellation-info p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.record-observations {
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+  background: #f8fafc;
+  padding: 16px;
+  margin-top: 17px;
+}
+
+.record-supplies {
+  overflow: hidden;
+  border: 1px solid #ddd6fe;
+  border-radius: 13px;
+  background: #fafaff;
+  margin-top: 17px;
+}
+
+.record-supplies > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #ddd6fe;
+  padding: 14px 16px;
+}
+
+.record-supplies > header h4 {
+  margin: 0;
+}
+
+.record-supplies > header span {
+  color: #7c3aed;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.record-supplies-list {
+  padding: 5px 16px;
+}
+
+.record-supplies-list article {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #ede9fe;
+  padding: 12px 0;
+}
+
+.record-supplies-list article:last-child {
+  border-bottom: none;
+}
+
+.record-supplies-list strong,
+.record-supplies-list small {
+  display: block;
+}
+
+.record-supplies-list strong {
+  font-size: 13px;
+}
+
+.record-supplies-list small {
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.record-supplies-list article > span {
+  min-width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #ede9fe;
+  color: #6d28d9;
+  font-weight: 900;
+}
+
+.record-supplies-empty {
+  margin: 0;
+  color: #64748b;
+  padding: 17px;
+}
+
+.record-cancellation-info {
+  border: 1px solid #fecaca;
+  border-radius: 13px;
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 16px;
+  margin-top: 17px;
+}
+
+.record-cancellation-info small {
+  display: block;
+  margin-top: 8px;
+  color: #b91c1c;
+}
+
+.record-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 19px;
+  margin-top: 20px;
+}
+
+.record-modal-footer button,
+.record-cancellation-form footer button {
+  min-height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 10px;
+  padding: 0 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.record-modal-footer svg {
+  width: 17px;
+  height: 17px;
+}
+
+.record-secondary {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+}
+
+.record-danger {
+  border: 1px solid #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* =====================================================
+   FORMULARIO DE ANULACIÓN
+===================================================== */
+
+.record-cancellation-form {
+  padding: 24px;
+}
+
+.record-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 13px;
+  margin-bottom: 18px;
+}
+
+.record-warning svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+}
+
+.record-warning p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.record-cancellation-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.record-cancellation-form label > span {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.record-cancellation-form textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  outline: none;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
+.record-cancellation-form textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.record-cancellation-form footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 19px;
+  margin-top: 19px;
+}
+
+.record-cancellation-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   CARGA
+===================================================== */
+
+.admin-records-loading {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 35px;
+  text-align: center;
+}
+
+.admin-records-loading h2 {
+  margin: 17px 0 8px;
+}
+
+.admin-records-loading p {
+  margin: 0;
+  color: #64748b;
+}
+
+.admin-records-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: records-spin 0.8s linear infinite;
+}
+
+@keyframes records-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1280px) {
+  .admin-records-summary {
+    grid-template-columns: repeat(
+      3,
+      minmax(0, 1fr)
+    );
+  }
+
+  .admin-records-toolbar {
+    grid-template-columns: repeat(
+      4,
+      minmax(0, 1fr)
+    );
+  }
+
+  .records-search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-records-toolbar {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+
+  .records-search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .admin-records-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-records-refresh {
+    width: 100%;
+  }
+
+  .record-info-grid,
+  .record-clinical-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 590px) {
+  .admin-records-summary {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+
+  .admin-records-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .records-search {
+    grid-column: auto;
+  }
+
+  .record-modal-overlay {
+    padding: 10px;
+  }
+
+  .record-modal-content,
+  .record-cancellation-form {
+    padding: 18px;
+  }
+
+  .record-modal-footer,
+  .record-cancellation-form footer {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .record-modal-footer button,
+  .record-cancellation-form footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .admin-records-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-records-spinner {
+    animation: none;
+  }
+}
+
+/* Historial unificado por paciente */
+.record-history {
+  display: grid;
+  gap: 1rem;
+}
+
+.record-history > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.record-history > header h4,
+.record-history > header p {
+  margin: 0;
+}
+
+.record-history > header p {
+  margin-top: .3rem;
+  color: #64748b;
+}
+
+.record-history > header > strong {
+  white-space: nowrap;
+  color: #2563eb;
+}
+
+.record-history-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.record-history-item {
+  padding: 1.1rem;
+  border: 1px solid #dbe4f0;
+  border-left: 4px solid #3b82f6;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.record-history-item > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.record-history-item > header span:first-child {
+  color: #2563eb;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.record-history-item > header h4 {
+  margin: .2rem 0 0;
+}
+
+.record-history-item dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .9rem 1.25rem;
+  margin: 0;
+}
+
+.record-history-item dt {
+  margin-bottom: .2rem;
+  color: #64748b;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.record-history-item dd {
+  margin: 0;
+  color: #172033;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.record-history-cancel {
+  width: auto;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  gap: 8px;
+  border-radius: 9px;
+  margin-top: 1rem;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.record-history-cancel svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+.record-history-cancel:hover {
+  border-color: #b91c1c;
+  background: #b91c1c;
+}
+
+.record-history-cancel:focus-visible {
+  outline: 3px solid rgba(220, 38, 38, 0.22);
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  .record-history > header,
+  .record-history-item > header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .record-history-item dl {
+    grid-template-columns: 1fr;
+  }
+
+  .record-history-cancel {
+    width: 100%;
+    align-self: stretch;
+  }
+}

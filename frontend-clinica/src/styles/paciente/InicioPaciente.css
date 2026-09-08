@@ -1,0 +1,195 @@
+.patient-home {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.patient-welcome {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: rgb(255, 255, 255);
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 18px 35px rgba(37, 99, 235, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.patient-welcome:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 24px 40px rgba(37, 99, 235, 0.32);
+}
+
+.patient-welcome p {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.patient-welcome h1 {
+  font-size: 36px;
+  margin-bottom: 14px;
+}
+
+.patient-welcome span {
+  display: block;
+  opacity: 0.95;
+  margin-bottom: 22px;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 18px;
+}
+
+.welcome-actions a {
+  text-decoration: none;
+  background: white;
+  color: #2563eb;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-weight: 900;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.welcome-actions a:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
+}
+
+.welcome-actions a:nth-child(2) {
+  background: #1d4ed8;
+  color: white;
+}
+
+.patient-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 22px;
+  margin-bottom: 32px;
+}
+
+.patient-stats div {
+  background: rgb(233, 235, 247);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.patient-stats div:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+}
+
+.patient-stats strong {
+  display: block;
+  font-size: 30px;
+  color: #2563eb;
+  margin-bottom: 6px;
+}
+
+.patient-stats span {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.patient-home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.patient-shortcut-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  text-decoration: none;
+  color: #0f172a;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.patient-shortcut-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+}
+
+.patient-shortcut-card h3 {
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.patient-shortcut-card p {
+  color: #64748b;
+}
+
+@media (max-width: 900px) {
+  .patient-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .patient-home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .patient-home {
+    width: 100%;
+    max-width: none;
+    padding: 16px;
+  }
+
+  .patient-welcome {
+    padding: 24px 20px;
+    margin-bottom: 18px;
+    border-radius: 18px;
+  }
+
+  .patient-welcome:hover,
+  .patient-stats div:hover,
+  .patient-shortcut-card:hover { transform: none; }
+
+  .patient-welcome p { margin-bottom: 8px; }
+
+  .patient-welcome h1 {
+    font-size: clamp(26px, 8vw, 34px);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .welcome-actions { gap: 10px; }
+
+  .welcome-actions a {
+    flex: 1;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .patient-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .patient-stats div {
+    min-width: 0;
+    padding: 18px 16px;
+  }
+
+  .patient-stats strong {
+    font-size: 21px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .patient-stats span { font-size: 13px; }
+  .patient-home-grid { gap: 12px; }
+  .patient-shortcut-card { padding: 20px; }
+}
+
+@media (max-width: 360px) {
+  .patient-home { padding: 12px; }
+  .patient-stats { grid-template-columns: 1fr; }
+}

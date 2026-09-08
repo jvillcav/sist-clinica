@@ -1,0 +1,459 @@
+/* ========================================= */
+/* PORTAL DEL ODONTÓLOGO                     */
+/* ========================================= */
+
+.odontologo-portal {
+  min-height: 100vh;
+  background: #f6f8fc;
+  color: #0f172a;
+}
+
+/* ========================================= */
+/* BARRA SUPERIOR                            */
+/* ========================================= */
+
+.odontologo-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+}
+
+.odontologo-navbar-inner {
+  width: min(100%, 1480px);
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: minmax(230px, auto) 1fr auto;
+  align-items: center;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ========================================= */
+/* MARCA                                     */
+/* ========================================= */
+
+.odontologo-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.odontologo-brand-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.odontologo-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.odontologo-brand-text strong {
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.odontologo-brand-text span {
+  margin-top: 3px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ========================================= */
+/* NAVEGACIÓN                                */
+/* ========================================= */
+
+.odontologo-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.odontologo-nav-link {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  color: #334155;
+  padding: 0 13px;
+  font-size: 15px;
+  font-weight: 750;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.odontologo-nav-link:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.odontologo-nav-link.active {
+  background: #eaf2ff;
+  color: #2563eb;
+}
+
+.odontologo-nav-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.odontologo-nav-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ========================================= */
+/* ACCIONES                                  */
+/* ========================================= */
+
+.odontologo-navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.odontologo-notification-button,
+.odontologo-avatar-button,
+.odontologo-mobile-menu-button {
+  border: none;
+  cursor: pointer;
+}
+
+.odontologo-notification-button {
+  width: 43px;
+  height: 43px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: transparent;
+  color: #475569;
+}
+
+.odontologo-notification-button:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+.odontologo-notification-button svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.odontologo-notification-dot {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #ef4444;
+  box-sizing: content-box;
+}
+
+.odontologo-avatar-button {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 7px 17px rgba(37, 99, 235, 0.22);
+}
+
+.odontologo-avatar-button:hover {
+  transform: translateY(-1px);
+}
+
+/* ========================================= */
+/* MENÚ DEL USUARIO                          */
+/* ========================================= */
+
+.odontologo-user-menu {
+  position: relative;
+}
+
+.odontologo-user-dropdown {
+  width: 290px;
+  position: absolute;
+  top: calc(100% + 13px);
+  right: 0;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 13px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+}
+
+.odontologo-user-dropdown::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: -7px;
+  right: 17px;
+  border-top: 1px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.odontologo-dropdown-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px;
+}
+
+.odontologo-dropdown-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-weight: 900;
+}
+
+.odontologo-dropdown-user > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.odontologo-dropdown-user strong {
+  overflow: hidden;
+  color: #0f172a;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.odontologo-dropdown-user span {
+  overflow: hidden;
+  color: #64748b;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.odontologo-dropdown-divider {
+  height: 1px;
+  margin: 12px 0;
+  background: #e2e8f0;
+}
+
+.odontologo-logout-button {
+  width: 100%;
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #dc2626;
+  padding: 0 12px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.odontologo-logout-button:hover {
+  background: #fef2f2;
+}
+
+.odontologo-logout-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ========================================= */
+/* CONTENIDO                                 */
+/* ========================================= */
+
+.odontologo-main-content {
+  width: min(100%, 1480px);
+  min-height: calc(100vh - 82px);
+  margin: 0 auto;
+  padding: 34px 32px 50px;
+}
+
+/* ========================================= */
+/* MENÚ MÓVIL                               */
+/* ========================================= */
+
+.odontologo-mobile-menu-button {
+  width: 43px;
+  height: 43px;
+  display: none;
+  place-items: center;
+  border-radius: 11px;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.odontologo-mobile-menu-button svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ========================================= */
+/* RESPONSIVE                                */
+/* ========================================= */
+
+@media (max-width: 1120px) {
+  .odontologo-navbar-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    padding: 0 22px;
+  }
+
+  .odontologo-brand-text {
+    display: none;
+  }
+
+  .odontologo-brand-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .odontologo-nav-link {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 880px) {
+  .odontologo-navbar-inner {
+    min-height: 74px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .odontologo-brand-text {
+    display: flex;
+  }
+
+  .odontologo-navigation {
+    width: calc(100% - 32px);
+    position: absolute;
+    top: 74px;
+    left: 16px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    border: 1px solid #e2e8f0;
+    border-radius: 17px;
+    background: #ffffff;
+    padding: 12px;
+    box-shadow: 0 20px 46px rgba(15, 23, 42, 0.16);
+  }
+
+  .odontologo-navigation.open {
+    display: flex;
+  }
+
+  .odontologo-nav-link {
+    min-height: 48px;
+    justify-content: flex-start;
+    padding: 0 15px;
+  }
+
+  .odontologo-mobile-menu-button {
+    display: grid;
+  }
+
+  .odontologo-main-content {
+    min-height: calc(100vh - 74px);
+    padding: 28px 20px 44px;
+  }
+}
+
+@media (max-width: 520px) {
+  .odontologo-navbar-inner {
+    padding: 0 15px;
+  }
+
+  .odontologo-brand-logo {
+    width: 47px;
+    height: 47px;
+  }
+
+  .odontologo-brand-text strong {
+    font-size: 15px;
+  }
+
+  .odontologo-brand-text span {
+    font-size: 12px;
+  }
+
+  .odontologo-notification-button {
+    display: none;
+  }
+
+  .odontologo-avatar-button,
+  .odontologo-mobile-menu-button {
+    width: 41px;
+    height: 41px;
+  }
+
+  .odontologo-main-content {
+    padding: 24px 15px 38px;
+  }
+
+  .odontologo-user-dropdown {
+    width: min(290px, calc(100vw - 30px));
+    right: -52px;
+  }
+}

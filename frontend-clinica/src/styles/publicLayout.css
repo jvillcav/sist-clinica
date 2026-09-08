@@ -1,0 +1,12 @@
+.public-layout {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  background: #4a82bb;
+}
+
+.public-layout__content {
+  display: block;
+  flex: 1;
+  min-width: 0;
+}

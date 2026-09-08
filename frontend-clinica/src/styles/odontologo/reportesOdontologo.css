@@ -1,0 +1,529 @@
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.medical-reports-page {
+  width: 100%;
+  color: #0f172a;
+}
+
+.medical-reports-page *,
+.medical-reports-page *::before,
+.medical-reports-page *::after {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.medical-reports-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.medical-reports-eyebrow {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.medical-reports-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.12;
+}
+
+.medical-reports-header p {
+  max-width: 730px;
+  margin: 9px 0 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.medical-reports-header p strong {
+  color: #334155;
+}
+
+.medical-reports-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.medical-reports-actions label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.medical-reports-actions label span {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.medical-reports-actions select {
+  min-width: 185px;
+  min-height: 47px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0 13px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.medical-reports-actions select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.11);
+}
+
+.medical-reports-export {
+  min-height: 47px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid #2563eb;
+  border-radius: 11px;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0 17px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+}
+
+.medical-reports-export:hover {
+  background: #1d4ed8;
+}
+
+.medical-reports-export:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.medical-reports-export svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =====================================================
+   CONTENIDO EXPORTABLE
+===================================================== */
+
+.medical-reports-content {
+  border-radius: 22px;
+}
+
+.medical-reports-print-header {
+  display: none;
+}
+
+/* =====================================================
+   INDICADORES
+===================================================== */
+
+.medical-reports-summary {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    minmax(0, 1fr)
+  );
+  gap: 17px;
+  margin-bottom: 23px;
+}
+
+.medical-report-card {
+  min-height: 145px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 22px;
+  box-shadow: 0 8px 23px rgba(15, 23, 42, 0.06);
+}
+
+.medical-report-card div {
+  position: relative;
+  z-index: 2;
+}
+
+.medical-report-card span {
+  display: block;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.medical-report-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 32px;
+}
+
+.medical-report-card small {
+  display: block;
+  margin-top: 8px;
+  color: #94a3b8;
+}
+
+.medical-report-card > svg {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border-radius: 13px;
+  padding: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.medical-report-card.patients {
+  color: #2563eb;
+}
+
+.medical-report-card.patients > svg {
+  background: #eff6ff;
+}
+
+.medical-report-card.treatments {
+  color: #16a34a;
+}
+
+.medical-report-card.treatments > svg {
+  background: #f0fdf4;
+}
+
+.medical-report-card.attendance {
+  color: #7c3aed;
+}
+
+.medical-report-card.attendance > svg {
+  background: #f5f3ff;
+}
+
+.medical-report-card.supplies {
+  color: #ea580c;
+}
+
+.medical-report-card.supplies > svg {
+  background: #fff7ed;
+}
+
+/* =====================================================
+   GRÁFICAS
+===================================================== */
+
+.medical-reports-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(360px, 0.9fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.medical-chart-card {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 19px;
+  background: #ffffff;
+  padding: 22px;
+  box-shadow: 0 9px 25px rgba(15, 23, 42, 0.055);
+}
+
+.medical-chart-card > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 19px;
+}
+
+.medical-chart-card h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.medical-chart-card header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.medical-chart-container {
+  width: 100%;
+  height: 315px;
+  position: relative;
+}
+
+.doughnut-chart .medical-chart-container {
+  height: 315px;
+}
+
+.full-chart {
+  margin-bottom: 20px;
+}
+
+.medical-chart-container.bars {
+  height: 320px;
+}
+
+.medical-chart-empty {
+  margin: 12px 0 0;
+  color: #64748b;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* =====================================================
+   RESUMEN MENSUAL
+===================================================== */
+
+.medical-monthly-detail {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 19px;
+  background: #ffffff;
+  box-shadow: 0 9px 25px rgba(15, 23, 42, 0.055);
+}
+
+.medical-monthly-detail > header {
+  border-bottom: 1px solid #e2e8f0;
+  background: #fbfdff;
+  padding: 21px 23px;
+}
+
+.medical-monthly-detail h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.medical-monthly-detail header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.medical-monthly-table-wrapper {
+  overflow-x: auto;
+}
+
+.medical-monthly-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+
+.medical-monthly-table th {
+  background: #f8fafc;
+  color: #475569;
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.medical-monthly-table td {
+  border-top: 1px solid #e2e8f0;
+  padding: 15px 18px;
+  color: #334155;
+}
+
+.medical-monthly-table tbody tr:hover {
+  background: #fbfdff;
+}
+
+.monthly-attendance {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.monthly-attendance.good {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.monthly-attendance.medium {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+.monthly-attendance.low {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* =====================================================
+   CARGA Y ERROR
+===================================================== */
+
+.reports-loading,
+.reports-error {
+  min-height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 35px;
+  text-align: center;
+}
+
+.reports-spinner {
+  width: 49px;
+  height: 49px;
+  border: 4px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: reports-spin 0.8s linear infinite;
+}
+
+.reports-loading h2,
+.reports-error h2 {
+  margin: 18px 0 8px;
+}
+
+.reports-loading p,
+.reports-error p {
+  max-width: 520px;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.reports-error-icon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.reports-error-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.reports-error button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.reports-error button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes reports-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+  .medical-reports-summary {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+
+  .medical-reports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .medical-reports-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .medical-reports-actions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .medical-reports-actions select,
+  .medical-reports-export {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .medical-reports-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .medical-chart-card {
+    padding: 17px;
+  }
+
+  .medical-chart-container,
+  .doughnut-chart .medical-chart-container,
+  .medical-chart-container.bars {
+    height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reports-spinner {
+    animation: none;
+  }
+}
