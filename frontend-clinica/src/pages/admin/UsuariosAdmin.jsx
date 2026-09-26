@@ -5,6 +5,8 @@ import {
 } from 'react';
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
+import { normalizarTexto } from '../../utils/texto';
 import '../../styles/admin/usuariosAdmin.css';
 
 /* =====================================================
@@ -176,14 +178,6 @@ const obtenerIniciales = (nombre = '') => {
     .toUpperCase();
 };
 
-const normalizarTexto = (texto = '') => {
-  return String(texto)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-};
-
 const obtenerEtiquetaRol = (rol) => {
   return (
     roles.find((item) => item.valor === rol)
@@ -230,6 +224,9 @@ const Usuarios = () => {
 
   const [filtroEstado, setFiltroEstado] =
     useState('todos');
+
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [tamanoPagina, setTamanoPagina] = useState(10);
 
   const [mostrarFormulario, setMostrarFormulario] =
     useState(false);
@@ -325,6 +322,15 @@ const Usuarios = () => {
     filtroRol,
     filtroEstado
   ]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda, filtroRol, filtroEstado]);
+
+  const usuariosPaginados = useMemo(() => {
+    const inicio = (paginaActual - 1) * tamanoPagina;
+    return usuariosFiltrados.slice(inicio, inicio + tamanoPagina);
+  }, [usuariosFiltrados, paginaActual, tamanoPagina]);
 
   const resumen = useMemo(() => {
     return {
@@ -815,7 +821,7 @@ const Usuarios = () => {
               </thead>
 
               <tbody>
-                {usuariosFiltrados.map(
+                {usuariosPaginados.map(
                   (usuario) => {
                     const procesando =
                       usuarioProcesando ===
@@ -987,6 +993,17 @@ const Usuarios = () => {
             </button>
           </div>
         )}
+        <Pagination
+          currentPage={paginaActual}
+          pageSize={tamanoPagina}
+          totalItems={usuariosFiltrados.length}
+          onPageChange={setPaginaActual}
+          onPageSizeChange={(size) => {
+            setTamanoPagina(size);
+            setPaginaActual(1);
+          }}
+          label="usuarios"
+        />
       </section>
 
       {mostrarFormulario && (
@@ -1144,6 +1161,16 @@ const Usuarios = () => {
                     utilizando su carnet de identidad
                     como contraseña inicial.
                   </p>
+                </div>
+              )}
+
+              {error && (
+                <div
+                  className="admin-users-message error form-feedback"
+                  role="alert"
+                >
+                  <IconoAdvertencia />
+                  <span>{error}</span>
                 </div>
               )}
 

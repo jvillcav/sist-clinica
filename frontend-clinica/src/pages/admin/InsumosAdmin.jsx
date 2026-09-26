@@ -5,6 +5,8 @@ import {
 } from 'react';
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
+import { obtenerArreglo } from '../../utils/respuesta';
 
 import '../../styles/admin/insumosAdmin.css';
 
@@ -87,19 +89,6 @@ const especialidadesSugeridas = [
 /* =====================================================
    UTILIDADES
 ===================================================== */
-
-const obtenerArreglo = (
-  respuesta,
-  propiedad
-) => {
-  const datos =
-    respuesta?.data?.[propiedad] ??
-    respuesta?.data;
-
-  return Array.isArray(datos)
-    ? datos
-    : [];
-};
 
 const normalizarTexto = (
   valor = ''
@@ -521,6 +510,12 @@ const Insumos = () => {
     setFiltroML
   ] = useState('todos');
 
+  const [paginaActual, setPaginaActual] =
+    useState(1);
+
+  const [tamanoPagina, setTamanoPagina] =
+    useState(10);
+
   const [
     modalInsumo,
     setModalInsumo
@@ -865,6 +860,27 @@ const Insumos = () => {
       filtroPrioridad,
       filtroML
     ]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [
+    busqueda,
+    filtroCategoria,
+    filtroEstado,
+    filtroStock,
+    filtroPrioridad,
+    filtroML
+  ]);
+
+  const insumosPaginados = useMemo(() => {
+    const inicio =
+      (paginaActual - 1) * tamanoPagina;
+
+    return insumosFiltrados.slice(
+      inicio,
+      inicio + tamanoPagina
+    );
+  }, [insumosFiltrados, paginaActual, tamanoPagina]);
 
   /* ===================================================
      MODAL CREAR / EDITAR
@@ -1236,6 +1252,15 @@ const Insumos = () => {
     );
   };
 
+  const abrirReabastecimientoGeneral = () => {
+    setInsumoSeleccionado(null);
+    setFormularioReabastecimiento(
+      formularioReabastecimientoInicial
+    );
+    setError('');
+    setModalReabastecimiento(true);
+  };
+
   const cerrarReabastecimiento =
     () => {
       if (procesando) {
@@ -1258,6 +1283,14 @@ const Insumos = () => {
   const reabastecerInsumo =
     async (evento) => {
       evento.preventDefault();
+
+      if (!insumoSeleccionado) {
+        setError(
+          'Selecciona un insumo para registrar la entrada.'
+        );
+
+        return;
+      }
 
       const cantidad =
         Number(
@@ -1503,6 +1536,17 @@ const Insumos = () => {
             {actualizando
               ? 'Actualizando...'
               : 'Actualizar'}
+          </button>
+
+          <button
+            type="button"
+            className="inventory-restock-button"
+            onClick={
+              abrirReabastecimientoGeneral
+            }
+          >
+            <IconoReabastecer />
+            Reabastecer insumo
           </button>
 
           <button
@@ -1937,7 +1981,7 @@ const Insumos = () => {
               </thead>
 
               <tbody>
-                {insumosFiltrados.map(
+                {insumosPaginados.map(
                   (insumo) => {
                     const estadoStock =
                       obtenerEstadoStock(
@@ -2219,6 +2263,17 @@ const Insumos = () => {
             </table>
           </div>
         )}
+        <Pagination
+          currentPage={paginaActual}
+          pageSize={tamanoPagina}
+          totalItems={insumosFiltrados.length}
+          onPageChange={setPaginaActual}
+          onPageSizeChange={(size) => {
+            setTamanoPagina(size);
+            setPaginaActual(1);
+          }}
+          label="insumos"
+        />
       </section>
 
       {/* MODAL CREAR / EDITAR */}
@@ -2274,6 +2329,13 @@ const Insumos = () => {
                 guardarInsumo
               }
             >
+              {error && (
+                <div className="inventory-message error inventory-form-feedback" role="alert">
+                  <IconoAdvertencia />
+                  <span>{error}</span>
+                </div>
+              )}
+
               <div className="inventory-form-grid">
                 <label>
                   <span>
@@ -2755,8 +2817,7 @@ const Insumos = () => {
 
       {/* MODAL REABASTECIMIENTO */}
 
-      {modalReabastecimiento &&
-        insumoSeleccionado && (
+      {modalReabastecimiento && (
           <div className="inventory-modal-overlay">
             <section className="inventory-modal small">
               <header>
@@ -2770,7 +2831,7 @@ const Insumos = () => {
                   </h2>
 
                   <p>
-                    Registra una nueva entrada de existencias.
+                    Selecciona el insumo y registra una nueva entrada de existencias.
                   </p>
                 </div>
 
@@ -2791,29 +2852,70 @@ const Insumos = () => {
                   reabastecerInsumo
                 }
               >
-                <div className="inventory-selected-item">
-                  <span>
-                    <IconoCaja />
-                  </span>
-
-                  <div>
-                    <strong>
-                      {
-                        insumoSeleccionado.nombre
-                      }
-                    </strong>
-
-                    <small>
-                      Stock actual:{' '}
-                      {formatearNumero(
-                        insumoSeleccionado.stockActual
-                      )}{' '}
-                      {
-                        insumoSeleccionado.unidadMedida
-                      }
-                    </small>
+                {error && (
+                  <div className="inventory-message error inventory-form-feedback" role="alert">
+                    <IconoAdvertencia />
+                    <span>{error}</span>
                   </div>
-                </div>
+                )}
+
+                {!insumoSeleccionado ? (
+                  <label className="inventory-restock-selector">
+                    <span>Insumo existente *</span>
+
+                    <select
+                      value=""
+                      onChange={(evento) => {
+                        const insumo = insumos.find(
+                          (item) => item._id === evento.target.value
+                        );
+
+                        if (insumo) {
+                          setInsumoSeleccionado(insumo);
+                        }
+                      }}
+                      required
+                    >
+                      <option value="" disabled>
+                        Selecciona un insumo activo
+                      </option>
+
+                      {insumos
+                        .filter((insumo) => insumo.estado !== 'inactivo')
+                        .map((insumo) => (
+                          <option key={insumo._id} value={insumo._id}>
+                            {insumo.codigo} - {insumo.nombre}
+                          </option>
+                        ))}
+                    </select>
+                  </label>
+                ) : (
+                  <>
+                    <div className="inventory-selected-item">
+                      <span>
+                        <IconoCaja />
+                      </span>
+
+                      <div>
+                        <strong>
+                          {insumoSeleccionado.nombre}
+                        </strong>
+
+                        <small>
+                          Stock actual:{' '}
+                          {formatearNumero(
+                            insumoSeleccionado.stockActual
+                          )}{' '}
+                          {insumoSeleccionado.unidadMedida}
+                        </small>
+                      </div>
+                    </div>
+
+                    <p className="inventory-restock-note">
+                      Se conservarán el lote y la fecha de vencimiento registrados en este insumo. La marca todavía no forma parte de los datos del inventario.
+                    </p>
+                  </>
+                )}
 
                 <div className="inventory-form-grid">
                   <label>
@@ -2956,6 +3058,13 @@ const Insumos = () => {
               </header>
 
               <div className="inventory-confirmation-body">
+                {error && (
+                  <div className="inventory-message error inventory-form-feedback" role="alert">
+                    <IconoAdvertencia />
+                    <span>{error}</span>
+                  </div>
+                )}
+
                 <div
                   className={`inventory-confirmation-icon ${
                     insumoSeleccionado.estado ===

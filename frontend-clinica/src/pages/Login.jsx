@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "../api/axios";
+import imagenBienvenida from "../assets/inicio/loginback.png";
 import "../styles/public/login.css";
 /* =====================================================
    CONFIGURACIÓN
@@ -17,29 +18,6 @@ const PASSWORD_SEGURA_REGEX =
 /* =====================================================
    ICONOS
 ===================================================== */
-const IconoPaciente = () => (
-  <svg viewBox="0 0 24 24">
-    <circle cx="12" cy="8" r="4" />
-    <path d="M4 21a8 8 0 0 1 16 0" />
-  </svg>
-);
-const IconoOdontologo = () => (
-  <svg viewBox="0 0 24 24">
-    <path d="M12 3c-3.8-2.2-7.4.7-7.4 4.9 0 3.1 1.8 5.1 2.4 8.5.3 1.8.7 4.6 2.4 4.6 1.4 0 1.4-4.4 2.6-4.4s1.2 4.4 2.6 4.4c1.7 0 2.1-2.8 2.4-4.6.6-3.4 2.4-5.4 2.4-8.5C19.4 3.7 15.8.8 12 3Z" />
-  </svg>
-);
-const IconoRecepcionista = () => (
-  <svg viewBox="0 0 24 24">
-    <rect x="5" y="4" width="14" height="17" rx="2" />
-    <path d="M9 4V2h6v2M9 9h6M9 13h6M9 17h4" />
-  </svg>
-);
-const IconoAdministrador = () => (
-  <svg viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="3" />
-    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1L7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z" />
-  </svg>
-);
 const IconoCorreo = () => (
   <svg viewBox="0 0 24 24">
     <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -83,25 +61,13 @@ const IconoEnviar = () => (
   </svg>
 );
 /* =====================================================
-   ROLES
+  TÍTULOS DE ROL
 ===================================================== */
-const ROLES = {
-  paciente: {
-    titulo: "Paciente",
-    Icono: IconoPaciente,
-  },
-  odontologo: {
-    titulo: "Odontólogo",
-    Icono: IconoOdontologo,
-  },
-  recepcionista: {
-    titulo: "Recepcionista",
-    Icono: IconoRecepcionista,
-  },
-  administrador: {
-    titulo: "Administrador",
-    Icono: IconoAdministrador,
-  },
+const TITULOS_POR_ROL = {
+  administrador: "Administrador",
+  odontologo: "Odontólogo",
+  recepcionista: "Recepcionista",
+  paciente: "Paciente",
 };
 /* =====================================================
    COMPONENTE
@@ -110,7 +76,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const resetToken = searchParams.get("resetToken");
-  const [rolSeleccionado, setRolSeleccionado] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mostrarPassword, setMostrarPassword] = useState(false);
@@ -141,7 +106,6 @@ const Login = () => {
       );
       if (datosGuardados) {
         setEmail(datosGuardados.email || "");
-        setRolSeleccionado(datosGuardados.rol || "");
         setRecordarme(true);
       }
     } catch {
@@ -212,12 +176,6 @@ const Login = () => {
   /* ===================================================
      LOGIN
   =================================================== */
-  const seleccionarRol = (rol) => {
-    setRolSeleccionado(rol);
-    setError("");
-    setMensaje("");
-    setEstadoIngreso("idle");
-  };
   const marcarCampo = (campo) => {
     setCamposTocados((estadoActual) => ({
       ...estadoActual,
@@ -225,9 +183,6 @@ const Login = () => {
     }));
   };
   const validarLogin = () => {
-    if (!rolSeleccionado) {
-      return "Selecciona el rol con el que deseas ingresar.";
-    }
     if (!EMAIL_REGEX.test(email.trim())) {
       return "Ingresa un correo electrónico válido.";
     }
@@ -259,7 +214,6 @@ const Login = () => {
       const { data } = await api.post("/usuarios/login", {
         email: email.trim(),
         password,
-        rol: rolSeleccionado,
       });
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
@@ -273,7 +227,6 @@ const Login = () => {
           "loginRecordado",
           JSON.stringify({
             email: email.trim(),
-            rol: rolSeleccionado,
           }),
         );
       } else {
@@ -284,7 +237,7 @@ const Login = () => {
         throw new Error("El usuario no tiene una ruta de acceso válida.");
       }
       setMensaje(
-        `Acceso correcto. Bienvenido, ${data.usuario.nombre || ROLES[data.usuario.rol].titulo}.`,
+        `Acceso correcto. Bienvenido, ${data.usuario.nombre || TITULOS_POR_ROL[data.usuario.rol]}.`,
       );
       setEstadoIngreso("success");
       await new Promise((resolver) => window.setTimeout(resolver, 650));
@@ -506,68 +459,33 @@ const Login = () => {
   =================================================== */
   return (
     <main className="login-page">
-      <header className="login-heading">
-        <span className="login-eyebrow">Acceso seguro</span>
-        <h1>Ingresa al sistema de la clínica</h1>
-        <p>Selecciona tu rol e introduce tus credenciales personales.</p>
-      </header>
       <section className="login-wrapper">
-        <div className="login-panel roles-panel">
-          <div className="login-panel-heading">
-            <span>01</span>
-            <div>
-              <h2>Selecciona tu rol</h2>
-              <p>
-                El sistema comprobará que tus credenciales pertenezcan al perfil
-                elegido.
-              </p>
-            </div>
+        <div className="login-welcome">
+          <div className="login-welcome-image">
+            <img
+              src={imagenBienvenida}
+              alt="Atención odontológica profesional"
+            />
           </div>
-          <div className="roles-grid">
-            {Object.entries(ROLES).map(([clave, rol]) => {
-              const { Icono } = rol;
-              const seleccionado = rolSeleccionado === clave;
-              return (
-                <button
-                  key={clave}
-                  type="button"
-                  className={`role-card ${seleccionado ? "selected" : ""}`}
-                  data-role={clave}
-                  onClick={() => seleccionarRol(clave)}
-                  aria-pressed={seleccionado}
-                >
-                  <span className="role-icon">
-                    <Icono />
-                  </span>
-                  <strong>{rol.titulo}</strong>
-                  <p>{rol.descripcion}</p>
-                </button>
-              );
-            })}
+          <div className="login-welcome-copy">
+            <span className="login-eyebrow">Tu salud, nuestra prioridad</span>
+            <h1>Bienvenido de nuevo a "Clínica Dental Orellana"</h1>
+            <p>
+              Plataforma para pacientes, odontólogos, recepcionistas y
+              administradores.
+            </p>
           </div>
         </div>
         <div
-          className={`login-panel credentials-panel ${
+          className={`login-panel login-card credentials-panel ${
             estadoIngreso === "success" ? "is-success" : ""
           }`}
         >
-          <div className="login-panel-heading">
-            <span>02</span>
-            <div>
-              <h2>Ingresa tus credenciales</h2>
-            </div>
+          <div className="login-card-heading">
+            <span className="login-eyebrow">Acceso seguro</span>
+            <h2>Inicia sesión en tu cuenta</h2>
+            <p>Ingresa tus credenciales para acceder.</p>
           </div>
-          {rolSeleccionado && (
-            <div className="selected-role">
-              <IconoEscudo />
-              <div>
-                <span>
-                  Ingresar como <strong>{ROLES[rolSeleccionado].titulo}</strong>
-                </span>
-                <small>{ROLES[rolSeleccionado].descripcion}</small>
-              </div>
-            </div>
-          )}
           {error && (
             <div className="login-alert error" role="alert">
               {error}
@@ -690,7 +608,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              disabled={!rolSeleccionado || cargando}
+              disabled={cargando}
               className={`login-submit ${
                 estadoIngreso === "success" ? "is-success" : ""
               }`}

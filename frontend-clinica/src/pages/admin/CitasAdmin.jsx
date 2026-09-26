@@ -5,6 +5,8 @@ import {
 } from 'react';
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
+import { normalizarTexto } from '../../utils/texto';
 import '../../styles/admin/citasAdmin.css';
 
 /* =====================================================
@@ -273,14 +275,6 @@ const formatearFechaLarga = (fecha) => {
   });
 };
 
-const normalizarTexto = (texto = '') => {
-  return String(texto)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-};
-
 const obtenerNombrePaciente = (cita) => {
   const paciente = cita?.pacienteId;
 
@@ -413,6 +407,12 @@ const Citas = () => {
 
   const [filtroOrigen, setFiltroOrigen] =
     useState('todos');
+
+  const [paginaActual, setPaginaActual] =
+    useState(1);
+
+  const [tamanoPagina, setTamanoPagina] =
+    useState(10);
 
   const [cargando, setCargando] =
     useState(true);
@@ -685,6 +685,26 @@ const Citas = () => {
     citasFiltradas,
     fechaSeleccionadaTexto
   ]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [
+    fechaSeleccionadaTexto,
+    busqueda,
+    filtroEstado,
+    filtroOdontologo,
+    filtroOrigen
+  ]);
+
+  const citasDelDiaPaginadas = useMemo(() => {
+    const inicio =
+      (paginaActual - 1) * tamanoPagina;
+
+    return citasDelDia.slice(
+      inicio,
+      inicio + tamanoPagina
+    );
+  }, [citasDelDia, paginaActual, tamanoPagina]);
 
   const solicitudesPendientes =
     useMemo(() => {
@@ -1906,6 +1926,7 @@ setPacienteSolicitud({
             </p>
           </div>
         ) : (
+          <>
           <div className="daily-agenda-table-wrapper">
             <table className="daily-agenda-table">
               <thead>
@@ -1921,7 +1942,7 @@ setPacienteSolicitud({
               </thead>
 
               <tbody>
-                {citasDelDia.map((cita) => (
+                {citasDelDiaPaginadas.map((cita) => (
                   <tr key={cita._id}>
                     <td>
                       <div className="appointment-time">
@@ -2071,6 +2092,18 @@ setPacienteSolicitud({
               </tbody>
             </table>
           </div>
+          <Pagination
+            currentPage={paginaActual}
+            pageSize={tamanoPagina}
+            totalItems={citasDelDia.length}
+            onPageChange={setPaginaActual}
+            onPageSizeChange={(size) => {
+              setTamanoPagina(size);
+              setPaginaActual(1);
+            }}
+            label="citas"
+          />
+          </>
         )}
       </section>
 

@@ -5,6 +5,9 @@ import {
 } from 'react';
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
+import { obtenerArreglo } from '../../utils/respuesta';
+import { normalizarTexto } from '../../utils/texto';
 import '../../styles/admin/expedientesAdmin.css';
 
 /* =====================================================
@@ -111,32 +114,6 @@ const IconoCheck = () => (
 /* =====================================================
    UTILIDADES
 ===================================================== */
-
-const obtenerArreglo = (
-  respuesta,
-  propiedad
-) => {
-  const datos =
-    respuesta?.data?.[propiedad] ??
-    respuesta?.data;
-
-  return Array.isArray(datos)
-    ? datos
-    : [];
-};
-
-const normalizarTexto = (
-  texto = ''
-) => {
-  return String(texto)
-    .normalize('NFD')
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    )
-    .toLowerCase()
-    .trim();
-};
 
 const obtenerNombreCompleto = (
   persona
@@ -282,6 +259,12 @@ const Expedientes = () => {
     fechaHasta,
     setFechaHasta
   ] = useState('');
+
+  const [paginaActual, setPaginaActual] =
+    useState(1);
+
+  const [tamanoPagina, setTamanoPagina] =
+    useState(10);
 
   const [
     expedienteSeleccionado,
@@ -646,6 +629,20 @@ const Expedientes = () => {
         ).length
       }));
     }, [expedientesFiltrados]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda, filtroOdontologo, filtroEstado, fechaDesde, fechaHasta]);
+
+  const expedientesPaginados = useMemo(() => {
+    const inicio =
+      (paginaActual - 1) * tamanoPagina;
+
+    return expedientesAgrupados.slice(
+      inicio,
+      inicio + tamanoPagina
+    );
+  }, [expedientesAgrupados, paginaActual, tamanoPagina]);
 
   /* ===================================================
      DETALLE
@@ -1132,7 +1129,7 @@ const Expedientes = () => {
               </thead>
 
               <tbody>
-                {expedientesAgrupados.map(
+                {expedientesPaginados.map(
                   (grupo) => {
                     const expediente =
                       grupo.ultimaAtencion;
@@ -1262,6 +1259,17 @@ const Expedientes = () => {
             </table>
           </div>
         )}
+        <Pagination
+          currentPage={paginaActual}
+          pageSize={tamanoPagina}
+          totalItems={expedientesAgrupados.length}
+          onPageChange={setPaginaActual}
+          onPageSizeChange={(size) => {
+            setTamanoPagina(size);
+            setPaginaActual(1);
+          }}
+          label="expedientes"
+        />
       </section>
 
       {/* MODAL DETALLE */}
@@ -1716,6 +1724,13 @@ const Expedientes = () => {
                     required
                   />
                 </label>
+
+                {error && (
+                  <div className="record-form-feedback" role="alert">
+                    <IconoAdvertencia />
+                    <span>{error}</span>
+                  </div>
+                )}
 
                 <footer>
                   <button

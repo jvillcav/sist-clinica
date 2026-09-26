@@ -10,6 +10,8 @@ import {
 } from 'react-router-dom';
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
+import { normalizarTexto } from '../../utils/texto';
 import '../../styles/admin/pacientesAdmin.css';
 
 /* =====================================================
@@ -183,14 +185,6 @@ const obtenerIniciales = (
   }`.toUpperCase() || 'PA';
 };
 
-const normalizarTexto = (texto = '') => {
-  return String(texto)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-};
-
 const formatearFecha = (fecha) => {
   if (!fecha) {
     return 'Sin registro';
@@ -318,6 +312,9 @@ const Pacientes = () => {
 
   const [filtroAcceso, setFiltroAcceso] =
     useState('todos');
+
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [tamanoPagina, setTamanoPagina] = useState(10);
 
   const [
     mostrarFormulario,
@@ -508,6 +505,15 @@ const Pacientes = () => {
       filtroEstado,
       filtroAcceso
     ]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda, filtroEstado, filtroAcceso]);
+
+  const pacientesPaginados = useMemo(() => {
+    const inicio = (paginaActual - 1) * tamanoPagina;
+    return pacientesFiltrados.slice(inicio, inicio + tamanoPagina);
+  }, [pacientesFiltrados, paginaActual, tamanoPagina]);
 
   const resumen = useMemo(() => {
     const ahora = new Date();
@@ -1361,7 +1367,7 @@ const Pacientes = () => {
               </thead>
 
               <tbody>
-                {pacientesFiltrados.map(
+                {pacientesPaginados.map(
                   (paciente) => {
                     const procesando =
                       pacienteProcesando ===
@@ -1597,6 +1603,17 @@ const Pacientes = () => {
             </button>
           </div>
         )}
+        <Pagination
+          currentPage={paginaActual}
+          pageSize={tamanoPagina}
+          totalItems={pacientesFiltrados.length}
+          onPageChange={setPaginaActual}
+          onPageSizeChange={(size) => {
+            setTamanoPagina(size);
+            setPaginaActual(1);
+          }}
+          label="pacientes"
+        />
       </section>
 
       {/* =================================================

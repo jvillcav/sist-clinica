@@ -143,6 +143,7 @@ const MisCitasPaciente = () => {
   };
 
   const abrirReprogramacion = (cita) => {
+    setError('');
     setReprogramando(cita);
 
     setNuevoHorario({
@@ -374,6 +375,12 @@ const MisCitasPaciente = () => {
             </button>
 
             <h2>Reprogramar cita</h2>
+
+            {error && (
+              <div className="patient-form-feedback" role="alert">
+                {error}
+              </div>
+            )}
 
             <label>Nueva fecha</label>
             <input

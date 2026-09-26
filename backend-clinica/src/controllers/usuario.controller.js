@@ -38,7 +38,7 @@ const RESET_TOKEN_MINUTOS =
   );
 
 const MENSAJE_CREDENCIALES_INVALIDAS =
-  'El correo, la contraseña o el rol seleccionado no son correctos.';
+  'El correo o la contraseña no son correctos.';
 
 /* =====================================================
    UTILIDADES
@@ -447,28 +447,23 @@ export const loginUsuario =
     try {
       const {
         email,
-        password,
-        rol
+        password
       } = req.body;
 
       if (
         !email ||
-        !password ||
-        !rol
+        !password
       ) {
         return res
           .status(400)
           .json({
             mensaje:
-              'El correo, la contraseña y el rol son obligatorios.'
+              'El correo y la contraseña son obligatorios.'
           });
       }
 
       if (
-        !esCorreoValido(email) ||
-        !rolesPermitidos.includes(
-          rol
-        )
+        !esCorreoValido(email)
       ) {
         return res
           .status(401)
@@ -541,12 +536,9 @@ export const loginUsuario =
           usuario.password
         );
 
-      const rolValido =
-        usuario.rol === rol;
 
       if (
-        !passwordValido ||
-        !rolValido
+        !passwordValido
       ) {
         usuario.intentosFallidos =
           Number(

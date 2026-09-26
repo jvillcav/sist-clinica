@@ -69,6 +69,7 @@
 }
 
 .inventory-refresh-button,
+.inventory-restock-button,
 .inventory-primary-button {
   min-height: 48px;
   display: inline-flex;
@@ -91,6 +92,18 @@
   color: #2563eb;
 }
 
+.inventory-restock-button {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.inventory-restock-button:hover:not(:disabled) {
+  border-color: #93c5fd;
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
 .inventory-refresh-button:hover:not(:disabled) {
   border-color: #93c5fd;
   background: #eff6ff;
@@ -110,6 +123,7 @@
 }
 
 .inventory-refresh-button:disabled,
+.inventory-restock-button:disabled,
 .inventory-primary-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -117,6 +131,7 @@
 }
 
 .inventory-refresh-button svg,
+.inventory-restock-button svg,
 .inventory-primary-button svg {
   width: 19px;
   height: 19px;
@@ -177,6 +192,10 @@
 
 .inventory-message.error button:hover {
   background: #fee2e2;
+}
+
+.inventory-form-feedback {
+  margin: 0 0 18px;
 }
 
 /* =====================================================
@@ -1005,6 +1024,45 @@
   color: #334155;
   font-size: 12px;
   font-weight: 850;
+}
+
+.inventory-restock-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.inventory-restock-selector > span {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.inventory-restock-selector select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0 13px;
+}
+
+.inventory-restock-selector select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.inventory-restock-note {
+  margin: 14px 0 0;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 11px 13px;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .inventory-form-grid input,

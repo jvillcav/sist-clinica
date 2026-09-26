@@ -160,10 +160,12 @@ const PerfilPaciente = () => {
       setPaciente(data.paciente);
       cargarFormulario(data.paciente);
 
-      localStorage.setItem(
-        'usuario',
-        JSON.stringify(data.usuario)
-      );
+      if (data.usuario) {
+        localStorage.setItem(
+          'usuario',
+          JSON.stringify(data.usuario)
+        );
+      }
 
       setModoEdicion(false);
       mostrarToast('Perfil actualizado correctamente.', 'success');
@@ -194,7 +196,7 @@ const PerfilPaciente = () => {
     }
 
     try {
-      await api.put('/pacientes/mi-perfil/password', {
+      await api.put('/pacientes/mi-password', {
         passwordActual: password.actual,
         passwordNueva: password.nueva
       });
@@ -206,7 +208,7 @@ const PerfilPaciente = () => {
       });
 
       setMostrarPassword(false);
-      setMensaje('Contraseña actualizada correctamente.');
+      mostrarToast('Contraseña actualizada correctamente.', 'success');
     } catch (error) {
       setError(
         error.response?.data?.mensaje ||

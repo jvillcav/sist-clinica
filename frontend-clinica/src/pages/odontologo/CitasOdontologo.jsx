@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import api from '../../api/axios';
+import { normalizarTexto } from '../../utils/texto';
 import '../../styles/odontologo/citasOdontologo.css';
 
 /* =====================================================
@@ -84,15 +85,6 @@ const capitalizar = (texto = '') => {
 
   return texto.charAt(0).toUpperCase() +
     texto.slice(1);
-};
-
-const normalizarTexto = (texto = '') => {
-  return texto
-    .toString()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
 };
 
 const obtenerNombrePaciente = (paciente) => {

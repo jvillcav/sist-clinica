@@ -305,6 +305,18 @@
   color: #0f172a;
 }
 
+.patient-form-feedback {
+  margin: -8px 0 16px;
+  border: 1px solid #fecaca;
+  border-radius: 11px;
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 12px 13px;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
 .patient-modal-close {
   position: absolute;
   top: 16px;

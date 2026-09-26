@@ -166,18 +166,6 @@ const RegistrarPacienteRecepcion = () => {
         </button>
       </div>
 
-      {mensaje && (
-        <div className="reception-success-message">
-          {mensaje}
-        </div>
-      )}
-
-      {error && (
-        <div className="reception-error-message">
-          {error}
-        </div>
-      )}
-
       {registroCreado && (
         <section className="reception-registration-summary">
           <div>
@@ -525,6 +513,68 @@ const RegistrarPacienteRecepcion = () => {
           </button>
         </div>
       </form>
+
+      {mensaje && (
+        <div className="reception-success-overlay">
+          <section
+            className="reception-success-dialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="reception-success-title"
+          >
+            <div className="reception-success-icon" aria-hidden="true">
+              ✓
+            </div>
+
+            <h2 id="reception-success-title">
+              Paciente registrado correctamente
+            </h2>
+
+            <p>
+              {mensaje}
+            </p>
+
+            <button
+              type="button"
+              className="reception-success-close"
+              onClick={() => setMensaje('')}
+            >
+              Continuar
+            </button>
+          </section>
+        </div>
+      )}
+
+      {error && (
+        <div className="reception-success-overlay">
+          <section
+            className="reception-success-dialog reception-error-dialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="reception-error-title"
+          >
+            <div className="reception-error-icon" aria-hidden="true">
+              !
+            </div>
+
+            <h2 id="reception-error-title">
+              No se pudo registrar el paciente
+            </h2>
+
+            <p>
+              {error}
+            </p>
+
+            <button
+              type="button"
+              className="reception-error-close"
+              onClick={() => setError('')}
+            >
+              Revisar información
+            </button>
+          </section>
+        </div>
+      )}
     </main>
   );
 };

@@ -1,0 +1,16 @@
+backend-clinica/ml-service/app.py:14-26 | cargar_archivo_entorno
+backend-clinica/ml-service/app.py:67-78 | respuesta_error
+backend-clinica/ml-service/app.py:79-84 | normalizar_horizonte
+backend-clinica/ml-service/app.py:85-106 | obtener_payload
+backend-clinica/ml-service/app.py:107-182 | preparar_dataframe
+backend-clinica/ml-service/app.py:183-193 | clasificar_tendencia
+backend-clinica/ml-service/app.py:194-213 | completar_serie_mensual
+backend-clinica/ml-service/app.py:214-239 | suavizar_atipicos
+backend-clinica/ml-service/app.py:240-251 | ajustar_lineal
+backend-clinica/ml-service/app.py:252-325 | validar_temporalmente
+backend-clinica/ml-service/app.py:326-343 | error_porcentual_absoluto
+backend-clinica/ml-service/app.py:344-391 | clasificar_calidad
+backend-clinica/ml-service/app.py:392-639 | construir_estimacion_preliminar
+backend-clinica/ml-service/app.py:640-1087 | construir_prediccion
+backend-clinica/ml-service/app.py:1089-1103 | health
+backend-clinica/ml-service/app.py:1105-1198 | prediccion_consumo

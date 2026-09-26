@@ -719,6 +719,118 @@
   color: #166534;
 }
 
+.reception-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(3px);
+}
+
+.reception-success-dialog {
+  width: min(440px, 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 32px 28px 28px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+  animation: reception-success-appear 0.22s ease-out;
+}
+
+.reception-success-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.reception-success-dialog h2 {
+  margin: 0;
+  color: #166534;
+  font-size: 22px;
+}
+
+.reception-success-dialog p {
+  margin: 10px 0 22px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.reception-success-close {
+  min-width: 130px;
+  border: 1px solid #16a34a;
+  border-radius: 10px;
+  background: #16a34a;
+  color: #ffffff;
+  padding: 11px 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.reception-success-close:hover {
+  border-color: #15803d;
+  background: #15803d;
+}
+
+.reception-error-dialog {
+  border-color: #fecaca;
+}
+
+.reception-error-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.reception-error-dialog h2 {
+  color: #991b1b;
+}
+
+.reception-error-close {
+  min-width: 170px;
+  border: 1px solid #dc2626;
+  border-radius: 10px;
+  background: #dc2626;
+  color: #ffffff;
+  padding: 11px 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.reception-error-close:hover {
+  border-color: #b91c1c;
+  background: #b91c1c;
+}
+
+@keyframes reception-success-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .reception-error-message {
   border: 1px solid #fecaca;
   background: #fee2e2;

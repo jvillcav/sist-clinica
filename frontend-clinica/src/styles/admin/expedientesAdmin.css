@@ -851,6 +851,27 @@
   line-height: 1.5;
 }
 
+.record-form-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 16px;
+  border: 1px solid #fecaca;
+  border-radius: 11px;
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 12px 13px;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.record-form-feedback svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .record-cancellation-form label {
   display: flex;
   flex-direction: column;

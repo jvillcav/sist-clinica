@@ -900,10 +900,24 @@ export const obtenerMiPerfilPaciente =
 export const actualizarMiPerfilPaciente =
   async (req, res) => {
     try {
-      const paciente =
+      let paciente =
         await Paciente.findOne({
           usuarioId: req.usuario.id
         });
+
+      if (!paciente) {
+        const usuario =
+          await Usuario.findById(
+            req.usuario.id
+          );
+
+        if (usuario?.pacienteId) {
+          paciente =
+            await Paciente.findById(
+              usuario.pacienteId
+            );
+        }
+      }
 
       if (!paciente) {
         return res.status(404).json({
@@ -912,30 +926,17 @@ export const actualizarMiPerfilPaciente =
         });
       }
 
-      /*
-       * El paciente solo puede modificar
-       * información de contacto.
-       */
-      const {
-        telefono,
-        direccion,
-        email,
-        contactoEmergencia
-      } = req.body;
+      const datos =
+        obtenerDatosPacientePermitidos(
+          req.body
+        );
 
-      if (telefono !== undefined) {
-        paciente.telefono =
-          normalizarTexto(telefono);
-      }
+      delete datos.ci;
+      delete datos.estado;
 
-      if (direccion !== undefined) {
-        paciente.direccion =
-          normalizarTexto(direccion);
-      }
-
-      if (email !== undefined) {
+      if (datos.email !== undefined) {
         const correoNormalizado =
-          normalizarCorreo(email);
+          datos.email;
 
         const correoOcupado =
           await Usuario.findOne({
@@ -965,23 +966,10 @@ export const actualizarMiPerfilPaciente =
         );
       }
 
-      if (
-        contactoEmergencia !==
-        undefined
-      ) {
-        paciente.contactoEmergencia = {
-          nombre: normalizarTexto(
-            contactoEmergencia?.nombre
-          ),
+      delete datos.email;
 
-          telefono: normalizarTexto(
-            contactoEmergencia?.telefono
-          ),
-
-          parentesco: normalizarTexto(
-            contactoEmergencia?.parentesco
-          )
-        };
+      for (const [campo, valor] of Object.entries(datos)) {
+        paciente[campo] = valor;
       }
 
       await paciente.save();
