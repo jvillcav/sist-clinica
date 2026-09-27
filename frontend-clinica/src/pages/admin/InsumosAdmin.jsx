@@ -22,7 +22,6 @@ const formularioInsumoInicial = {
   unidadMedida: '',
   stockActual: '',
   stockMinimo: '',
-  costoUnitario: '',
   prioridad: 'media',
   especialidad: 'Todas',
   aplicacion: 'base',
@@ -120,21 +119,6 @@ const formatearNumero = (
     'es-BO',
     {
       maximumFractionDigits: 2
-    }
-  ).format(
-    convertirNumero(valor)
-  );
-};
-
-const formatearMoneda = (
-  valor
-) => {
-  return new Intl.NumberFormat(
-    'es-BO',
-    {
-      style: 'currency',
-      currency: 'BOB',
-      minimumFractionDigits: 2
     }
   ).format(
     convertirNumero(valor)
@@ -404,25 +388,6 @@ const IconoAgotado = () => (
   </svg>
 );
 
-const IconoDinero = () => (
-  <svg viewBox="0 0 24 24">
-    <rect
-      x="3"
-      y="5"
-      width="18"
-      height="14"
-      rx="2"
-    />
-
-    <path d="M7 9h.01M17 15h.01" />
-    <circle
-      cx="12"
-      cy="12"
-      r="2.5"
-    />
-  </svg>
-);
-
 const IconoEditar = () => (
   <svg viewBox="0 0 24 24">
     <path d="m4 20 4-1 10-10-3-3L5 16l-1 4Z" />
@@ -476,8 +441,7 @@ const Insumos = () => {
     insumosInactivos: 0,
     insumosBajoStock: 0,
     insumosAgotados: 0,
-    unidadesDisponibles: 0,
-    valorInventario: 0
+    unidadesDisponibles: 0
   });
 
   const [
@@ -678,13 +642,6 @@ const Insumos = () => {
                 resultadoResumen.value
                   .data?.resumen
                   ?.unidadesDisponibles || 0
-              ),
-
-            valorInventario:
-              Number(
-                resultadoResumen.value
-                  .data?.resumen
-                  ?.valorInventario || 0
               )
           });
         } else {
@@ -944,12 +901,6 @@ const Insumos = () => {
             0
         ),
 
-      costoUnitario:
-        String(
-          insumo.costoUnitario ??
-            0
-        ),
-
       prioridad:
         insumo.prioridad ||
         'media',
@@ -1044,11 +995,6 @@ const Insumos = () => {
           formularioInsumo.stockMinimo
         );
 
-      const costoUnitario =
-        Number(
-          formularioInsumo.costoUnitario
-        );
-
       if (
         !codigo ||
         !nombre ||
@@ -1089,19 +1035,6 @@ const Insumos = () => {
         return;
       }
 
-      if (
-        !Number.isFinite(
-          costoUnitario
-        ) ||
-        costoUnitario < 0
-      ) {
-        setError(
-          'El costo unitario debe ser igual o mayor que cero.'
-        );
-
-        return;
-      }
-
       const datos = {
         codigo,
 
@@ -1117,8 +1050,6 @@ const Insumos = () => {
         unidadMedida,
 
         stockMinimo,
-
-        costoUnitario,
 
         prioridad:
           formularioInsumo.prioridad,
@@ -1518,7 +1449,7 @@ const Insumos = () => {
           </h1>
 
           <p>
-            Administra existencias, niveles mínimos, costos y reabastecimientos.
+            Administra existencias, niveles mínimos y reabastecimientos.
           </p>
         </div>
 
@@ -1705,25 +1636,6 @@ const Insumos = () => {
           <IconoReabastecer />
         </article>
 
-        <article className="value">
-          <div>
-            <span>
-              Valor del inventario
-            </span>
-
-            <strong>
-              {formatearMoneda(
-                resumen.valorInventario
-              )}
-            </strong>
-
-            <small>
-              Stock por costo unitario
-            </small>
-          </div>
-
-          <IconoDinero />
-        </article>
       </section>
 
       {/* FILTROS */}
@@ -1973,8 +1885,6 @@ const Insumos = () => {
                   <th>Stock</th>
                   <th>Vencimiento</th>
                   <th>Nivel de existencias</th>
-                  <th>Costo unitario</th>
-                  <th>Valor actual</th>
                   <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
@@ -1996,14 +1906,6 @@ const Insumos = () => {
                     const estadoVencimiento =
                       obtenerEstadoVencimiento(
                         insumo
-                      );
-
-                    const valorActual =
-                      convertirNumero(
-                        insumo.stockActual
-                      ) *
-                      convertirNumero(
-                        insumo.costoUnitario
                       );
 
                     const estaInactivo =
@@ -2170,22 +2072,6 @@ const Insumos = () => {
                               }
                             </small>
                           </div>
-                        </td>
-
-                        <td>
-                          <strong className="inventory-money">
-                            {formatearMoneda(
-                              insumo.costoUnitario
-                            )}
-                          </strong>
-                        </td>
-
-                        <td>
-                          <strong className="inventory-money total">
-                            {formatearMoneda(
-                              valorActual
-                            )}
-                          </strong>
                         </td>
 
                         <td>
@@ -2503,28 +2389,6 @@ const Insumos = () => {
                       )
                     }
                     required
-                  />
-                </label>
-
-                <label>
-                  <span>
-                    Costo unitario (Bs)
-                  </span>
-
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    value={
-                      formularioInsumo.costoUnitario
-                    }
-                    placeholder="0.00"
-                    onChange={(evento) =>
-                      actualizarCampoInsumo(
-                        'costoUnitario',
-                        evento.target.value
-                      )
-                    }
                   />
                 </label>
 

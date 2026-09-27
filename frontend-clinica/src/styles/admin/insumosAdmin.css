@@ -205,7 +205,7 @@
 .admin-inventory-summary {
   display: grid;
   grid-template-columns: repeat(
-    6,
+    5,
     minmax(0, 1fr)
   );
   gap: 14px;
@@ -303,14 +303,6 @@
 
 .admin-inventory-summary .units > svg {
   background: #f5f3ff;
-}
-
-.admin-inventory-summary .value {
-  color: #0891b2;
-}
-
-.admin-inventory-summary .value > svg {
-  background: #ecfeff;
 }
 
 /* =====================================================
@@ -743,18 +735,6 @@
   color: #64748b;
   font-size: 9px;
   overflow-wrap: anywhere;
-}
-
-/* MONEDA */
-
-.inventory-money {
-  color: #334155;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.inventory-money.total {
-  color: #0891b2;
 }
 
 /* ESTADO */

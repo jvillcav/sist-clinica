@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState
 } from 'react';
 
@@ -249,11 +250,22 @@ const Usuarios = () => {
   const [mensaje, setMensaje] =
     useState('');
 
+  const [mostrarNotificacion, setMostrarNotificacion] =
+    useState(false);
+
+  const temporizadorNotificacion = useRef(null);
+
   const [error, setError] =
     useState('');
 
   useEffect(() => {
     obtenerUsuarios();
+
+    return () => {
+      if (temporizadorNotificacion.current) {
+        clearTimeout(temporizadorNotificacion.current);
+      }
+    };
   }, []);
 
   const obtenerUsuarios = async () => {
@@ -370,7 +382,25 @@ const Usuarios = () => {
 
   const limpiarMensajes = () => {
     setMensaje('');
+    setMostrarNotificacion(false);
     setError('');
+
+    if (temporizadorNotificacion.current) {
+      clearTimeout(temporizadorNotificacion.current);
+    }
+  };
+
+  const mostrarMensajeExito = (texto) => {
+    setMensaje(texto);
+    setMostrarNotificacion(true);
+
+    if (temporizadorNotificacion.current) {
+      clearTimeout(temporizadorNotificacion.current);
+    }
+
+    temporizadorNotificacion.current = setTimeout(() => {
+      setMostrarNotificacion(false);
+    }, 2800);
   };
 
   const abrirNuevoUsuario = () => {
@@ -464,7 +494,7 @@ const Usuarios = () => {
         );
       }
 
-      setMensaje(
+      mostrarMensajeExito(
         respuesta.data?.mensaje ||
           (
             usuarioEditando
@@ -518,7 +548,7 @@ const Usuarios = () => {
         }
       );
 
-      setMensaje(
+      mostrarMensajeExito(
         data?.mensaje ||
           `Usuario ${
             nuevoEstado
@@ -561,7 +591,7 @@ const Usuarios = () => {
         `/usuarios/${usuario._id}`
       );
 
-      setMensaje(
+      mostrarMensajeExito(
         data?.mensaje ||
           'Usuario eliminado correctamente.'
       );
@@ -640,8 +670,8 @@ const Usuarios = () => {
         </div>
       </header>
 
-      {mensaje && (
-        <div className="admin-users-message success">
+      {mostrarNotificacion && mensaje && (
+        <div className="admin-users-message success toast-notice">
           <IconoCheck />
           <span>{mensaje}</span>
         </div>
