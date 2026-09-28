@@ -1,31 +1,39 @@
 import { useEffect, useState } from 'react';
+import {
+  Activity,
+  Bone,
+  Smile,
+  Sparkles,
+  Stethoscope,
+  Wrench
+} from 'lucide-react';
 import api from '../../api/axios';
 import '../../styles/paciente/AgendarCitaPaciente.css';
 
 const servicios = [
   {
     nombre: 'Odontología General',
-    icono: '🦷'
+    icono: Stethoscope
   },
   {
     nombre: 'Blanqueamiento Dental',
-    icono: '✨'
+    icono: Sparkles
   },
   {
     nombre: 'Ortodoncia',
-    icono: '😁'
+    icono: Smile
   },
   {
     nombre: 'Endodoncia',
-    icono: '🩺'
+    icono: Activity
   },
   {
     nombre: 'Extracción',
-    icono: '🦴'
+    icono: Bone
   },
   {
     nombre: 'Implantes',
-    icono: '🔩'
+    icono: Wrench
   }
 ];
 
@@ -153,15 +161,17 @@ const horarioOcupado = (hora) => {
         <section className="booking-grid">
           {servicios.map((servicio) => (
             <button
+              type="button"
               key={servicio.nombre}
               className="booking-card"
+              aria-label={`Agendar ${servicio.nombre}`}
               onClick={() => {
                 setFormulario({ ...formulario, servicio: servicio.nombre });
                 setPaso(2);
               }}
             >
               <div className="service-icon">
-                {servicio.icono}
+                <servicio.icono aria-hidden="true" />
               </div>
               
               <h3>{servicio.nombre}</h3>

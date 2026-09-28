@@ -328,19 +328,150 @@
 }
 
 @media (max-width: 760px) {
+  .patient-record-page,
+  .patient-record-page *,
+  .patient-record-page *::before,
+  .patient-record-page *::after {
+    box-sizing: border-box;
+  }
+
+  .patient-record-page {
+    width: 100%;
+    max-width: none;
+    padding: 20px 16px 24px;
+  }
+
+  .patient-record-header {
+    margin-bottom: 18px;
+  }
+
+  .patient-record-header h1 {
+    font-size: 29px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .patient-record-profile {
+    border-radius: 17px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+
+  .patient-record-profile:hover {
+    transform: none;
+  }
+
   .patient-record-main {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    gap: 14px;
+  }
+
+  .patient-record-avatar {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    font-size: 20px;
+  }
+
+  .patient-record-name-row {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .patient-record-name-row h2 {
+    font-size: 19px;
+    overflow-wrap: anywhere;
+  }
+
+  .patient-state-badge {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 
   .patient-record-data-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .patient-record-data-grid div {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .patient-record-data-grid strong {
+    overflow-wrap: anywhere;
+    font-size: 13px;
+  }
+
+  .patient-clinical-alerts {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .clinical-info-box {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .patient-record-toolbar {
+    gap: 12px;
+    margin: 22px 0 14px;
+  }
+
+  .patient-record-toolbar h2 {
+    font-size: 20px;
+  }
+
+  .patient-treatment-list {
+    gap: 13px;
+  }
+
+  .patient-treatment-card {
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  }
+
+  .patient-treatment-card:hover {
+    transform: none;
+  }
+
+  .treatment-card-header h3 {
+    font-size: 18px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .treatment-meta {
+    gap: 8px 12px;
+    font-size: 13px;
+  }
+
+  .treatment-information-grid {
+    gap: 9px;
+    margin-top: 14px;
+  }
+
+  .treatment-information-grid div,
+  .treatment-observations {
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .treatment-observations {
+    margin-top: 10px;
+  }
+
+  .appointments-empty {
+    border-radius: 16px;
+    padding: 30px 18px;
   }
 }
 
 @media (max-width: 480px) {
   .patient-record-data-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

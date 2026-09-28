@@ -249,6 +249,19 @@
 }
 
 @media (max-width: 800px) {
+  .patient-profile-page,
+  .patient-profile-page *,
+  .patient-profile-page *::before,
+  .patient-profile-page *::after {
+    box-sizing: border-box;
+  }
+
+  .patient-profile-page {
+    width: 100%;
+    max-width: none;
+    padding: 20px 16px 24px;
+  }
+
   .patient-profile-heading,
   .profile-summary-title,
   .profile-security-row {
@@ -262,8 +275,111 @@
   }
 
   .profile-summary-card {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    gap: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 17px;
+  }
+
+  .profile-summary-card:hover,
+  .profile-form-card:hover {
+    transform: none;
+  }
+
+  .profile-summary-avatar {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    font-size: 22px;
+  }
+
+  .patient-profile-heading {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .patient-profile-heading h1 {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .profile-edit-button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .profile-summary-title {
+    gap: 8px;
+  }
+
+  .profile-summary-title h2 {
+    font-size: 19px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .profile-summary-title p {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+  }
+
+  .patient-state-badge {
+    align-self: flex-start;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .profile-progress {
+    margin-top: 14px;
+  }
+
+  .profile-progress > div:first-child {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .profile-form-card {
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 17px;
+  }
+
+  .profile-section-title {
+    margin-bottom: 16px;
+  }
+
+  .profile-section-title h2,
+  .profile-security-row h2 {
+    font-size: 19px;
+  }
+
+  .profile-form-grid {
+    gap: 17px;
+  }
+
+  .profile-form-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+    gap: 9px;
+  }
+
+  .profile-form-actions button {
+    min-height: 46px;
+    width: 100%;
+  }
+
+  .profile-security-row button {
+    width: 100%;
+  }
+
+  .password-form {
+    gap: 14px;
+  }
+
+  .password-form button {
+    width: 100%;
   }
 }
 

@@ -65,17 +65,23 @@ const InicioPaciente = () => {
         </div>
 
         <div>
-          <strong>{resumenExpediente.tratamiento}</strong>
+          <strong title={resumenExpediente.tratamiento}>
+            {resumenExpediente.tratamiento}
+          </strong>
           <span>Último tratamiento</span>
         </div>
 
         <div>
-          <strong>{resumenExpediente.diagnostico}</strong>
+          <strong title={resumenExpediente.diagnostico}>
+            {resumenExpediente.diagnostico}
+          </strong>
           <span>Último diagnóstico</span>
         </div>
 
         <div>
-          <strong>{resumenExpediente.odontologo}</strong>
+          <strong title={resumenExpediente.odontologo}>
+            {resumenExpediente.odontologo}
+          </strong>
           <span>Último odontólogo</span>
         </div>
       </section>

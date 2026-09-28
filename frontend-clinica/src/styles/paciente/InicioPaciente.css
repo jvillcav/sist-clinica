@@ -62,35 +62,61 @@
 
 .patient-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 22px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.045);
 }
 
-.patient-stats div {
-  background: rgb(233, 235, 247);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
-  border: 1px solid #e5e7eb;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.patient-stats > div {
+  min-width: 0;
+  min-height: 132px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 24px;
+  transition: background-color 0.18s ease;
 }
 
-.patient-stats div:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+.patient-stats > div + div {
+  border-left: 1px solid #e2e8f0;
+}
+
+.patient-stats > div:hover {
+  background: #f8fbff;
 }
 
 .patient-stats strong {
   display: block;
-  font-size: 30px;
-  color: #2563eb;
+  display: -webkit-box;
+  overflow: hidden;
+  color: #172033;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.4;
   margin-bottom: 6px;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.patient-stats > div:first-child strong {
+  display: block;
+  color: #2563eb;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .patient-stats span {
   color: #64748b;
+  font-size: 12px;
   font-weight: 700;
+  line-height: 1.35;
 }
 
 .patient-home-grid {
@@ -129,16 +155,35 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .patient-stats > div + div {
+    border-left: 0;
+  }
+
+  .patient-stats > div:nth-child(even) {
+    border-left: 1px solid #e2e8f0;
+  }
+
+  .patient-stats > div:nth-child(n + 3) {
+    border-top: 1px solid #e2e8f0;
+  }
+
   .patient-home-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 760px) {
+  .patient-home,
+  .patient-home *,
+  .patient-home *::before,
+  .patient-home *::after {
+    box-sizing: border-box;
+  }
+
   .patient-home {
     width: 100%;
     max-width: none;
-    padding: 16px;
+    padding: 20px 16px 24px;
   }
 
   .patient-welcome {
@@ -148,7 +193,6 @@
   }
 
   .patient-welcome:hover,
-  .patient-stats div:hover,
   .patient-shortcut-card:hover { transform: none; }
 
   .patient-welcome p { margin-bottom: 8px; }
@@ -169,19 +213,22 @@
 
   .patient-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
-  .patient-stats div {
+  .patient-stats > div {
     min-width: 0;
-    padding: 18px 16px;
+    min-height: 108px;
+    padding: 15px 14px;
   }
 
   .patient-stats strong {
-    font-size: 21px;
-    line-height: 1.15;
-    overflow-wrap: anywhere;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .patient-stats > div:first-child strong {
+    font-size: 30px;
   }
 
   .patient-stats span { font-size: 13px; }
@@ -192,4 +239,12 @@
 @media (max-width: 360px) {
   .patient-home { padding: 12px; }
   .patient-stats { grid-template-columns: 1fr; }
+
+  .patient-stats > div:nth-child(even) {
+    border-left: 0;
+  }
+
+  .patient-stats > div + div {
+    border-top: 1px solid #e2e8f0;
+  }
 }
