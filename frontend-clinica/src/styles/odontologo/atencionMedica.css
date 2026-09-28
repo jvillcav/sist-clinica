@@ -840,6 +840,16 @@
   margin-top: 24px;
 }
 
+.patient-selection-navigation {
+  min-height: 72px;
+  justify-content: flex-end;
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  margin: 4px 0 18px;
+}
+
 .attention-button {
   min-height: 47px;
   display: inline-flex;
@@ -895,6 +905,16 @@
 
 .attention-button:disabled {
   opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.patient-selection-navigation .attention-button.primary:disabled,
+.patient-selection-navigation .attention-button.primary:disabled:hover {
+  border-color: #cbd5e1;
+  background: #e2e8f0;
+  color: #64748b;
+  box-shadow: none;
+  opacity: 1;
   cursor: not-allowed;
 }
 

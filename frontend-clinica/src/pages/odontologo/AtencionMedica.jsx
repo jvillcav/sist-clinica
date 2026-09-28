@@ -1087,6 +1087,18 @@ const AtencionMedica = () => {
               </div>
             )}
 
+          <footer className="attention-navigation patient-selection-navigation">
+            <button
+              type="button"
+              className="attention-button primary"
+              disabled={!consulta.pacienteId}
+              onClick={irPasoSiguiente}
+            >
+              Continuar
+              <IconoSiguiente />
+            </button>
+          </footer>
+
           <div className="attention-patient-list">
             {pacientesFiltrados.map(
               (paciente) => {
@@ -1140,16 +1152,6 @@ const AtencionMedica = () => {
             )}
           </div>
 
-          <footer className="attention-navigation">
-            <button
-              type="button"
-              className="attention-button primary"
-              onClick={irPasoSiguiente}
-            >
-              Continuar
-              <IconoSiguiente />
-            </button>
-          </footer>
         </section>
       )}
 

@@ -527,3 +527,285 @@
     animation: none;
   }
 }
+
+/* =====================================================
+   DOCUMENTO PDF
+===================================================== */
+
+.medical-export-stage {
+  position: fixed;
+  top: 0;
+  left: -10000px;
+  z-index: -1;
+  width: 794px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.medical-export-document {
+  width: 794px;
+  min-height: 1123px;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 36px 24px;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  line-height: 1.4;
+}
+
+.medical-export-document * {
+  box-sizing: border-box;
+}
+
+.medical-export-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 2px solid #dbeafe;
+  padding-bottom: 17px;
+}
+
+.medical-export-brand img {
+  width: 82px;
+  height: 82px;
+  flex: 0 0 82px;
+  object-fit: contain;
+}
+
+.medical-export-brand > div {
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.medical-export-brand > div strong {
+  color: #0f172a;
+  font-size: 12pt;
+  line-height: 1.3;
+}
+
+.medical-export-brand > div span {
+  color: #64748b;
+  font-size: 10pt;
+}
+
+.medical-export-title {
+  border-bottom: 1px solid #bfdbfe;
+  padding: 22px 0 18px;
+}
+
+.medical-export-title h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 20pt;
+  line-height: 1.15;
+}
+
+.medical-export-title p {
+  margin: 5px 0 0;
+  color: #475569;
+  font-size: 13pt;
+}
+
+.medical-export-metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 24px;
+  border-bottom: 1px solid #dbeafe;
+  padding: 14px 0;
+}
+
+.medical-export-metadata p {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  color: #334155;
+  font-size: 10.5pt;
+}
+
+.medical-export-metadata strong {
+  flex: 0 0 auto;
+  color: #1e293b;
+}
+
+.medical-export-metadata span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.medical-export-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.medical-export-summary article {
+  min-height: 120px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  border-radius: 12px;
+  background: #f1f7ff;
+  padding: 14px 16px;
+}
+
+.medical-export-summary article svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.medical-export-summary article strong {
+  margin-top: 8px;
+  font-size: 24pt;
+  line-height: 1;
+}
+
+.medical-export-summary article span {
+  margin-top: 5px;
+  color: #475569;
+  font-size: 10pt;
+}
+
+.medical-export-summary .patients {
+  color: #2563eb;
+}
+
+.medical-export-summary .treatments {
+  color: #15803d;
+}
+
+.medical-export-summary .attendance {
+  color: #6d28d9;
+}
+
+.medical-export-summary .supplies {
+  color: #c2410c;
+}
+
+.medical-export-activity {
+  border-bottom: 1px solid #bfdbfe;
+  padding: 20px 0 17px;
+}
+
+.medical-export-activity h3,
+.medical-export-indicators h3,
+.medical-export-observations h3 {
+  margin: 0 0 7px;
+  color: #0f172a;
+  font-size: 16pt;
+}
+
+.medical-export-activity p,
+.medical-export-observations p {
+  margin: 0;
+  color: #334155;
+  font-size: 12pt;
+  line-height: 1.55;
+}
+
+.medical-export-activity p strong {
+  color: #0f172a;
+}
+
+.medical-export-indicators {
+  padding: 17px 0;
+}
+
+.medical-export-indicators h3 {
+  margin-bottom: 9px;
+}
+
+.medical-export-indicators table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11pt;
+}
+
+.medical-export-indicators th {
+  background: #eff6ff;
+  color: #1e293b;
+  font-weight: 700;
+  text-align: left;
+}
+
+.medical-export-indicators th,
+.medical-export-indicators td {
+  border-bottom: 1px solid #dbeafe;
+  padding: 9px 11px;
+}
+
+.medical-export-indicators th:nth-child(2),
+.medical-export-indicators td:nth-child(2) {
+  width: 100px;
+  color: #1d4ed8;
+  font-weight: 700;
+  text-align: center;
+}
+
+.medical-export-indicators th:first-child {
+  width: 37%;
+}
+
+.medical-export-indicators td:last-child {
+  color: #475569;
+}
+
+.medical-export-observations {
+  border-top: 1px solid #bfdbfe;
+  padding: 16px 0 10px;
+}
+
+.medical-export-observations h3 {
+  margin-bottom: 5px;
+}
+
+.medical-export-signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  margin-top: 21px;
+  padding: 0 28px;
+  text-align: center;
+}
+
+.medical-export-signatures > div {
+  min-width: 0;
+}
+
+.medical-export-signatures > div > span {
+  display: block;
+  border-top: 1px solid #64748b;
+}
+
+.medical-export-signatures p {
+  margin: 4px 0 0;
+  color: #475569;
+  font-size: 10pt;
+}
+
+.medical-export-signatures strong {
+  display: block;
+  margin-top: 2px;
+  color: #1e293b;
+  font-size: 10pt;
+}
+
+.medical-export-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #dbeafe;
+  margin-top: auto;
+  padding-top: 10px;
+  color: #64748b;
+  font-size: 8pt;
+}

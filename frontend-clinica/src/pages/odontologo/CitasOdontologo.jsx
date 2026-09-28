@@ -411,15 +411,12 @@ const CitasOdontologo = () => {
       return;
     }
 
-    navigate(
-      `/odontologo/pacientes/${pacienteId}`,
-      {
-        state: {
-          pacienteId,
-          citaId: cita._id
-        }
+    navigate('/odontologo/pacientes', {
+      state: {
+        pacienteId,
+        citaId: cita._id
       }
-    );
+    });
   };
 
   const iniciarAtencion = (cita) => {

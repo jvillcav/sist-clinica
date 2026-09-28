@@ -567,141 +567,161 @@
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.08);
 }
 
-.doctor-supplies-dataset .doctor-supplies-table-wrapper {
-  padding: 20px 22px 5px;
-  scrollbar-color: #bfdbfe #eff6ff;
-  scrollbar-width: thin;
+.doctor-supplies-dataset-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 20px 22px 22px;
 }
 
-.doctor-supplies-dataset-table {
-  min-width: 1180px;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #dbe3ef;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.doctor-supplies-dataset-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  border: 0;
-  background: #2563eb;
-  color: #ffffff;
-  padding: 16px 17px;
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.doctor-supplies-dataset-table th:first-child,
-.doctor-supplies-dataset-table td:first-child {
-  padding-left: 22px;
-}
-
-.doctor-supplies-dataset-table th:last-child,
-.doctor-supplies-dataset-table td:last-child {
-  padding-right: 22px;
-}
-
-.doctor-supplies-dataset-table td {
-  height: 68px;
-  border-top: 1px solid #e2e8f0;
+.doctor-supplies-dataset-item {
+  min-width: 0;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #3b82f6;
+  border-radius: 13px;
   background: #ffffff;
-  color: #475569;
-  padding: 14px 17px;
-  font-size: 13px;
-  vertical-align: middle;
+  padding: 17px;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
 }
 
-.doctor-supplies-dataset-table tbody tr:nth-child(even) td {
-  background: #f8fbff;
+.doctor-supplies-dataset-item:hover {
+  border-color: #bfdbfe;
+  border-left-color: #2563eb;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+  transform: translateY(-1px);
 }
 
-.doctor-supplies-dataset-table tbody tr:hover td {
+.doctor-supplies-dataset-item > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.doctor-supplies-dataset-product {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.doctor-supplies-dataset-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
   background: #eff6ff;
+  color: #2563eb;
 }
 
-.doctor-supplies-dataset-table td:first-child strong {
-  display: inline-flex;
-  border-radius: 8px;
+.doctor-supplies-dataset-icon svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.doctor-supplies-dataset-label {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.doctor-supplies-dataset-product h3 {
+  margin: 4px 0 0;
+  color: #0f172a;
+  font-size: 15px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.doctor-supplies-dataset-product p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.doctor-supplies-dataset-period {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.doctor-supplies-dataset-period strong {
+  border-radius: 7px;
   background: #eef2ff;
   color: #4338ca;
-  padding: 7px 9px;
+  padding: 5px 8px;
   font-size: 12px;
 }
 
-.doctor-supplies-dataset-table td:nth-child(5) strong {
-  color: #0f172a;
-  font-size: 13px;
+.doctor-supplies-dataset-period small {
+  color: #64748b;
+  font-size: 11px;
 }
 
-.doctor-supplies-dataset-table td:nth-child(2),
-.doctor-supplies-dataset-table td:nth-child(3),
-.doctor-supplies-dataset-table td:nth-child(4),
-.doctor-supplies-dataset-table td:nth-child(8),
-.doctor-supplies-dataset-table td:nth-child(9) {
-  text-align: center;
-}
-
-.doctor-supplies-dataset-table th:nth-child(2),
-.doctor-supplies-dataset-table th:nth-child(3),
-.doctor-supplies-dataset-table th:nth-child(4),
-.doctor-supplies-dataset-table th:nth-child(8),
-.doctor-supplies-dataset-table th:nth-child(9) {
-  text-align: center;
-}
-
-.doctor-supplies-treatment-cell {
-  max-width: 250px;
-  color: #334155 !important;
-  overflow-wrap: anywhere;
-  line-height: 1.45;
-}
-
-.doctor-supplies-total {
-  min-width: 40px;
-  height: 34px;
-  display: inline-grid;
-  place-items: center;
-  border: 1px solid #bfdbfe;
-  border-radius: 999px;
-  background: #dbeafe;
-  color: #1d4ed8;
-  padding: 0 11px;
-  font-weight: 900;
-}
-
-.doctor-supplies-dataset-notes {
-  border: 1px solid #bfdbfe;
-  border-radius: 14px;
-  background: #f8fbff;
-  margin: 23px 22px 25px;
-  padding: 18px 20px;
-  color: #475569;
-}
-
-.doctor-supplies-dataset-notes > strong {
-  display: block;
-  color: #1d4ed8;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.doctor-supplies-dataset-notes > div {
+.doctor-supplies-dataset-details {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 11px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 15px;
+  padding-top: 13px;
 }
 
-.doctor-supplies-dataset-notes p {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.5;
+.doctor-supplies-dataset-treatment {
+  min-width: 0;
+}
+
+.doctor-supplies-dataset-treatment p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.doctor-supplies-dataset-metrics {
+  display: flex;
+  gap: 18px;
+  padding-left: 15px;
+  border-left: 1px solid #e2e8f0;
+}
+
+.doctor-supplies-dataset-metrics > div {
+  min-width: 74px;
+}
+
+.doctor-supplies-dataset-metrics span {
+  display: block;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.doctor-supplies-dataset-metrics strong {
+  display: block;
+  margin-top: 5px;
+  color: #1d4ed8;
+  font-size: 19px;
+  line-height: 1.1;
 }
 
 
@@ -864,6 +884,13 @@
     animation: none;
   }
 }
+
+@media (max-width: 900px) {
+  .doctor-supplies-dataset-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 760px) {
   .doctor-supplies-dataset .doctor-supplies-history-header {
     align-items: flex-start;
@@ -871,17 +898,36 @@
     padding: 22px 20px;
   }
 
-  .doctor-supplies-dataset .doctor-supplies-table-wrapper {
-    padding: 14px 14px 3px;
+  .doctor-supplies-dataset-list {
+    padding: 14px;
   }
 
-  .doctor-supplies-dataset-notes {
-    margin: 18px 14px 20px;
-    padding: 16px;
-  }
-
-  .doctor-supplies-dataset-notes > div {
+  .doctor-supplies-dataset-details {
     grid-template-columns: 1fr;
-    gap: 9px;
+    gap: 12px;
+  }
+
+  .doctor-supplies-dataset-metrics {
+    justify-content: flex-start;
+    gap: 28px;
+    border-top: 1px solid #e2e8f0;
+    border-left: 0;
+    padding: 12px 0 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .doctor-supplies-dataset .doctor-supplies-history-header {
+    padding: 20px 18px;
+  }
+
+  .doctor-supplies-dataset-item > header {
+    flex-direction: column;
+  }
+
+  .doctor-supplies-dataset-period {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import api from '../../api/axios';
 import '../../styles/odontologo/pacientesOdontologo.css';
@@ -219,6 +219,9 @@ const IconoCalendario = () => (
 
 const PacientesOdontologo = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const pacienteIdNavegacion =
+    location.state?.pacienteId;
 
   const [pacientes, setPacientes] =
     useState([]);
@@ -305,6 +308,23 @@ const PacientesOdontologo = () => {
       setCargandoExpediente(false);
     }
   };
+
+  useEffect(() => {
+    if (
+      !pacienteIdNavegacion ||
+      pacientes.length === 0
+    ) {
+      return;
+    }
+
+    const paciente = pacientes.find(
+      (item) => item._id === pacienteIdNavegacion
+    );
+
+    if (paciente) {
+      seleccionarPaciente(paciente);
+    }
+  }, [pacientes, pacienteIdNavegacion]);
 
   const volverListado = () => {
     setPacienteSeleccionado(null);
@@ -394,9 +414,6 @@ const PacientesOdontologo = () => {
 
   const expedientes =
     expedienteClinico?.expedientes || [];
-
-  const resumen =
-    expedienteClinico?.resumen || {};
 
   const edad =
     calcularEdad(
@@ -704,7 +721,8 @@ const PacientesOdontologo = () => {
                       <span>Última atención</span>
                       <strong>
                         {formatearFecha(
-                          resumen.ultimaAtencion
+                          expedientes[0]?.fechaAtencion ||
+                            expedientes[0]?.createdAt
                         )}
                       </strong>
                     </article>
@@ -750,11 +768,11 @@ const PacientesOdontologo = () => {
                 <section className="doctor-clinical-history">
                   <header className="doctor-clinical-history-header">
                     <div>
-                      <h2>Expediente Clínico</h2>
+                      <h2>Historial de atenciones</h2>
 
                       <p>
-                        {resumen.totalAtenciones || 0}{' '}
-                        {(resumen.totalAtenciones || 0) === 1
+                        {expedientes.length}{' '}
+                        {expedientes.length === 1
                           ? 'atención registrada'
                           : 'atenciones registradas'}
                       </p>
@@ -764,13 +782,21 @@ const PacientesOdontologo = () => {
                   {expedientes.length > 0 ? (
                     <div className="doctor-clinical-history-list">
                       {expedientes.map(
-                        (expediente) => (
+                        (expediente, indice) => (
                           <article
-                            className="doctor-clinical-history-card"
+                            className={`doctor-clinical-history-card ${
+                              expediente.estadoRegistro === 'anulado'
+                                ? 'anulado'
+                                : ''
+                            }`}
                             key={expediente._id}
                           >
                             <header>
                               <div>
+                                <span className="doctor-clinical-history-number">
+                                  Atención {expedientes.length - indice}
+                                </span>
+
                                 <h3>
                                   {obtenerTituloAtencion(
                                     expediente
@@ -784,50 +810,75 @@ const PacientesOdontologo = () => {
                                 </p>
                               </div>
 
-                              <span>
-                                <IconoCalendario />
+                              <div className="doctor-clinical-history-meta">
+                                <span className="doctor-clinical-history-date">
+                                  <IconoCalendario />
+                                  {formatearFecha(
+                                    expediente.fechaAtencion ||
+                                      expediente.createdAt
+                                  )}
+                                </span>
 
-                                {formatearFecha(
-                                  expediente.fechaAtencion ||
-                                    expediente.createdAt
-                                )}
-                              </span>
+                                <span
+                                  className={`doctor-clinical-history-status ${
+                                    expediente.estadoRegistro === 'anulado'
+                                      ? 'anulado'
+                                      : 'activo'
+                                  }`}
+                                >
+                                  {expediente.estadoRegistro === 'anulado'
+                                    ? 'Anulada'
+                                    : 'Activa'}
+                                </span>
+                              </div>
                             </header>
 
-                            <div className="doctor-clinical-history-data">
-                              <article>
-                                <span>Diagnóstico</span>
-
-                                <strong>
+                            <dl className="doctor-clinical-history-data">
+                              <div>
+                                <dt>Diagnóstico</dt>
+                                <dd>
                                   {expediente.diagnostico ||
                                     'Sin diagnóstico registrado'}
-                                </strong>
-                              </article>
+                                </dd>
+                              </div>
 
-                              <article>
-                                <span>Tratamiento</span>
-
-                                <strong>
+                              <div>
+                                <dt>Tratamiento</dt>
+                                <dd>
                                   {expediente.tratamiento ||
                                     expediente.planTratamiento ||
                                     'Sin tratamiento registrado'}
-                                </strong>
-                              </article>
-                            </div>
-
-                            {expediente.observaciones && (
-                              <div className="doctor-clinical-observations">
-                                <span>
-                                  Observaciones clínicas
-                                </span>
-
-                                <p>
-                                  {
-                                    expediente.observaciones
-                                  }
-                                </p>
+                                </dd>
                               </div>
-                            )}
+
+                              <div>
+                                <dt>Motivo de consulta</dt>
+                                <dd>
+                                  {expediente.motivoConsulta || 'Sin registro'}
+                                </dd>
+                              </div>
+
+                              <div>
+                                <dt>Piezas dentales</dt>
+                                <dd>
+                                  {expediente.piezasDentales || 'Sin registro'}
+                                </dd>
+                              </div>
+
+                              <div>
+                                <dt>Prescripción</dt>
+                                <dd>
+                                  {expediente.prescripcion || 'Sin registro'}
+                                </dd>
+                              </div>
+
+                              <div>
+                                <dt>Observaciones</dt>
+                                <dd>
+                                  {expediente.observaciones || 'Sin registro'}
+                                </dd>
+                              </div>
+                            </dl>
                           </article>
                         )
                       )}
@@ -837,12 +888,11 @@ const PacientesOdontologo = () => {
                       <IconoHistoria />
 
                       <h3>
-                        Sin atenciones registradas
+                        Paciente aún no atendido
                       </h3>
 
                       <p>
-                        Este paciente todavía no cuenta con
-                        antecedentes clínicos en el sistema.
+                        Todavía no hay atenciones clínicas registradas para este paciente.
                       </p>
 
                       <button

@@ -29,6 +29,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 import api from '../../api/axios';
+import logoClinica from '../../assets/inicio/logo-orellana.png';
 import '../../styles/odontologo/reportesOdontologo.css';
 
 ChartJS.register(
@@ -411,8 +412,32 @@ const ReportesOdontologo = () => {
         await html2canvas(elemento, {
           scale: 2,
           useCORS: true,
-          backgroundColor: '#f8fafc',
-          logging: false
+          backgroundColor: '#ffffff',
+          logging: false,
+          windowWidth: 794,
+          windowHeight: 1123,
+          onclone: (documentoClonado) => {
+            const escenario =
+              documentoClonado.querySelector(
+                '.medical-export-stage'
+              );
+            const plantilla =
+              documentoClonado.querySelector(
+                '.medical-export-document'
+              );
+
+            if (escenario) {
+              escenario.style.position = 'fixed';
+              escenario.style.left = '0';
+              escenario.style.top = '0';
+            }
+
+            if (plantilla) {
+              plantilla.style.position = 'static';
+              plantilla.style.left = '0';
+              plantilla.style.top = '0';
+            }
+          }
         });
 
       const imagen =
@@ -422,7 +447,7 @@ const ReportesOdontologo = () => {
         );
 
       const pdf = new jsPDF({
-        orientation: 'landscape',
+        orientation: 'portrait',
         unit: 'mm',
         format: 'a4'
       });
@@ -433,55 +458,22 @@ const ReportesOdontologo = () => {
       const altoPagina =
         pdf.internal.pageSize.getHeight();
 
-      const margen = 8;
+      const escala = Math.min(
+        anchoPagina / canvas.width,
+        altoPagina / canvas.height
+      );
 
-      const anchoImagen =
-        anchoPagina - margen * 2;
-
-      const altoImagen =
-        (
-          canvas.height *
-          anchoImagen
-        ) / canvas.width;
-
-      let posicionY = margen;
-      let alturaRestante =
-        altoImagen;
+      const anchoImagen = canvas.width * escala;
+      const altoImagen = canvas.height * escala;
 
       pdf.addImage(
         imagen,
         'PNG',
-        margen,
-        posicionY,
+        (anchoPagina - anchoImagen) / 2,
+        (altoPagina - altoImagen) / 2,
         anchoImagen,
         altoImagen
       );
-
-      alturaRestante -=
-        altoPagina - margen * 2;
-
-      while (alturaRestante > 0) {
-        pdf.addPage();
-
-        posicionY =
-          margen -
-          (
-            altoImagen -
-            alturaRestante
-          );
-
-        pdf.addImage(
-          imagen,
-          'PNG',
-          margen,
-          posicionY,
-          anchoImagen,
-          altoImagen
-        );
-
-        alturaRestante -=
-          altoPagina - margen * 2;
-      }
 
       const nombreOdontologo =
         reporte?.odontologo?.nombre
@@ -578,6 +570,14 @@ const ReportesOdontologo = () => {
       insumosUtilizados: 0
     };
 
+  const fechaEmision =
+    new Intl.DateTimeFormat('es-BO', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'America/La_Paz'
+    }).format(new Date());
+
   return (
     <main className="medical-reports-page">
       <header className="medical-reports-header">
@@ -643,7 +643,6 @@ const ReportesOdontologo = () => {
 
       <section
         className="medical-reports-content"
-        ref={reporteRef}
       >
         <div className="medical-reports-print-header">
           <h2>Clínica Orellana</h2>
@@ -886,6 +885,146 @@ const ReportesOdontologo = () => {
           </div>
         </section>
       </section>
+
+      <div className="medical-export-stage" aria-hidden="true">
+        <article
+          className="medical-export-document"
+          ref={reporteRef}
+        >
+          <header className="medical-export-brand">
+            <img
+              src={logoClinica}
+              alt=""
+            />
+
+            <div>
+              <strong>CLÍNICA ODONTOLÓGICA ORELLANA</strong>
+              <span>Shinahota · Cochabamba</span>
+            </div>
+
+          </header>
+
+          <section className="medical-export-title">
+            <h2>Reporte de actividad odontológica</h2>
+            <p>Resumen del periodo seleccionado</p>
+          </section>
+
+          <section className="medical-export-metadata">
+            <p>
+              <strong>Profesional:</strong>
+              <span>Dr. {reporte?.odontologo?.nombre || 'Odontólogo'}</span>
+            </p>
+            <p>
+              <strong>Fecha de emisión:</strong>
+              <span>{fechaEmision}</span>
+            </p>
+            <p>
+              <strong>Periodo:</strong>
+              <span>{formatearPeriodo()}</span>
+            </p>
+            <p>
+              <strong>Tipo:</strong>
+              <span>Reporte individual</span>
+            </p>
+          </section>
+
+          <section className="medical-export-summary">
+            <article className="patients">
+              <IconoPacientes />
+              <strong>{resumen.pacientesAtendidos}</strong>
+              <span>Pacientes únicos</span>
+            </article>
+            <article className="treatments">
+              <IconoTratamiento />
+              <strong>{resumen.tratamientosRealizados}</strong>
+              <span>Tratamientos</span>
+            </article>
+            <article className="attendance">
+              <IconoAsistencia />
+              <strong>{resumen.tasaAsistencia}%</strong>
+              <span>Asistencia</span>
+            </article>
+            <article className="supplies">
+              <IconoInsumos />
+              <strong>{resumen.insumosUtilizados}</strong>
+              <span>Unidades de insumos</span>
+            </article>
+          </section>
+
+          <section className="medical-export-activity">
+            <h3>Resumen de actividad</h3>
+            <p>
+              Durante el periodo consultado se registran{' '}
+              <strong>{resumen.pacientesAtendidos} pacientes únicos</strong>,{' '}
+              <strong>{resumen.tratamientosRealizados} tratamientos</strong> y{' '}
+              <strong>{resumen.insumosUtilizados} unidades de insumos</strong>{' '}
+              consumidas. La tasa de asistencia fue del{' '}
+              <strong>{resumen.tasaAsistencia}%</strong>.
+            </p>
+          </section>
+
+          <section className="medical-export-indicators">
+            <h3>Indicadores del periodo</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Indicador</th>
+                  <th>Resultado</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Pacientes atendidos</td>
+                  <td>{resumen.pacientesAtendidos}</td>
+                  <td>Personas únicas registradas</td>
+                </tr>
+                <tr>
+                  <td>Tratamientos realizados</td>
+                  <td>{resumen.tratamientosRealizados}</td>
+                  <td>Registros clínicos del periodo</td>
+                </tr>
+                <tr>
+                  <td>Tasa de asistencia</td>
+                  <td>{resumen.tasaAsistencia}%</td>
+                  <td>Indicador de citas atendidas</td>
+                </tr>
+                <tr>
+                  <td>Insumos utilizados</td>
+                  <td>{resumen.insumosUtilizados}</td>
+                  <td>Unidades consumidas</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section className="medical-export-observations">
+            <h3>Observaciones</h3>
+            <p>
+              Los indicadores corresponden al profesional y al periodo seleccionados.
+              Las cifras reflejan los registros disponibles en el sistema al momento
+              de emitir este reporte.
+            </p>
+          </section>
+
+          <section className="medical-export-signatures">
+            <div>
+              <span />
+              <p>Elaborado por</p>
+              <strong>Dr. {reporte?.odontologo?.nombre || 'Odontólogo'}</strong>
+            </div>
+            <div>
+              <span />
+              <p>Revisado por</p>
+            </div>
+          </section>
+
+          <footer className="medical-export-footer">
+            <span>Sistema de Gestión Clínica Orellana</span>
+            <span>Reporte interno · Página 1 de 1</span>
+          </footer>
+        </article>
+      </div>
     </main>
   );
 };

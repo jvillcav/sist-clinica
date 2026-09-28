@@ -6,6 +6,7 @@ import {
 
 
 import api from '../../api/axios';
+import Pagination from '../../components/Pagination';
 import '../../styles/odontologo/insumosOdontologo.css';
 
 /* =====================================================
@@ -182,6 +183,12 @@ const InsumosOdontologo = () => {
 
   const [estadoStock, setEstadoStock] =
     useState('todos');
+
+  const [paginaActual, setPaginaActual] =
+    useState(1);
+
+  const [tamanoPagina, setTamanoPagina] =
+    useState(10);
 
   const [cargando, setCargando] =
     useState(true);
@@ -385,6 +392,31 @@ const InsumosOdontologo = () => {
         a.insumo.localeCompare(b.insumo, 'es')
       );
   }, [consumosFiltrados]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda, periodo, estadoStock]);
+
+  useEffect(() => {
+    const totalPaginas = Math.max(
+      1,
+      Math.ceil(datasetConsolidado.length / tamanoPagina)
+    );
+
+    setPaginaActual((pagina) =>
+      Math.min(pagina, totalPaginas)
+    );
+  }, [datasetConsolidado.length, tamanoPagina]);
+
+  const datasetPaginado = useMemo(() => {
+    const inicio =
+      (paginaActual - 1) * tamanoPagina;
+
+    return datasetConsolidado.slice(
+      inicio,
+      inicio + tamanoPagina
+    );
+  }, [datasetConsolidado, paginaActual, tamanoPagina]);
 
   const resumenFiltrado = useMemo(() => {
     const unidades =
@@ -683,61 +715,80 @@ const InsumosOdontologo = () => {
       <section className="doctor-supplies-history doctor-supplies-dataset">
         <header className="doctor-supplies-history-header">
           <div>
-            <h2>Dataset consolidado por insumo y periodo</h2>
-            <p>Vista previa sin datos personales de pacientes</p>
+            <h2>Consumo consolidado por insumo</h2>
+            <p>Resumen de tratamientos y materiales utilizados por período</p>
           </div>
           <span className="doctor-supplies-dataset-count">
-            {datasetConsolidado.length} {datasetConsolidado.length === 1 ? 'fila' : 'filas'}
+            {datasetConsolidado.length} {datasetConsolidado.length === 1 ? 'registro' : 'registros'}
           </span>
         </header>
 
         {datasetConsolidado.length > 0 ? (
           <>
-            <div className="doctor-supplies-table-wrapper">
-              <table className="doctor-supplies-table doctor-supplies-dataset-table">
-                <thead>
-                  <tr>
-                    <th>Periodo</th>
-                    <th>Año</th>
-                    <th>Mes</th>
-                    <th>Trimestre</th>
-                    <th>Insumo</th>
-                    <th>Categoría</th>
-                    <th>Tratamiento</th>
-                    <th>N.º pacientes</th>
-                    <th>Cantidad total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {datasetConsolidado.map((fila) => (
-                    <tr key={fila.id}>
-                      <td><strong>{fila.periodo}</strong></td>
-                      <td>{fila.year}</td>
-                      <td>{fila.month}</td>
-                      <td>{fila.trimestre}</td>
-                      <td><strong>{fila.insumo}</strong></td>
-                      <td>{fila.categoria}</td>
-                      <td className="doctor-supplies-treatment-cell">{fila.tratamiento}</td>
-                      <td>{fila.numeroPacientes}</td>
-                      <td>
-                        <span className="doctor-supplies-total">
-                          {fila.cantidadTotal}
+            <div className="doctor-supplies-dataset-list">
+              {datasetPaginado.map((fila) => (
+                <article
+                  className="doctor-supplies-dataset-item"
+                  key={fila.id}
+                >
+                  <header>
+                    <div className="doctor-supplies-dataset-product">
+                      <span className="doctor-supplies-dataset-icon">
+                        <IconoCaja />
+                      </span>
+                      <div>
+                        <span className="doctor-supplies-dataset-label">
+                          Insumo
                         </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        <h3>{fila.insumo}</h3>
+                        <p>{fila.categoria}</p>
+                      </div>
+                    </div>
 
-            <aside className="doctor-supplies-dataset-notes">
-              <strong>Comprobaciones del dataset</strong>
-              <div>
-                <p>• Una fila representa un insumo en un periodo.</p>
-                <p>• Cantidad total corresponde a las unidades consumidas.</p>
-                <p>• No se muestran nombres, CI ni teléfonos.</p>
-              </div>
-            </aside>
+                    <div className="doctor-supplies-dataset-period">
+                      <span className="doctor-supplies-dataset-label">
+                        Período
+                      </span>
+                      <strong>{fila.periodo}</strong>
+                      <small>
+                        Trimestre {fila.trimestre}
+                      </small>
+                    </div>
+                  </header>
+
+                  <div className="doctor-supplies-dataset-details">
+                    <div className="doctor-supplies-dataset-treatment">
+                      <span className="doctor-supplies-dataset-label">
+                        Tratamientos relacionados
+                      </span>
+                      <p>{fila.tratamiento}</p>
+                    </div>
+
+                    <div className="doctor-supplies-dataset-metrics">
+                      <div>
+                        <span>Pacientes</span>
+                        <strong>{fila.numeroPacientes}</strong>
+                      </div>
+                      <div>
+                        <span>Unidades consumidas</span>
+                        <strong>{fila.cantidadTotal}</strong>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <Pagination
+              currentPage={paginaActual}
+              pageSize={tamanoPagina}
+              totalItems={datasetConsolidado.length}
+              onPageChange={setPaginaActual}
+              onPageSizeChange={(size) => {
+                setTamanoPagina(size);
+                setPaginaActual(1);
+              }}
+              label="registros consolidados"
+            />
           </>
         ) : (
           <div className="doctor-supplies-empty">
