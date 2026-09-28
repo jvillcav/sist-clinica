@@ -20,6 +20,7 @@ import solicitudCitaRoutes from './routes/solicitudCita.routes.js';
 import { config } from './config/env.js';
 
 const app = express();
+app.set('trust proxy', ['loopback', '192.168.70.20']);
 
 const origenesPermitidos = config.corsOrigins;
 
