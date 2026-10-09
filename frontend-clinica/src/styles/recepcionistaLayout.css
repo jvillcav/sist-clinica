@@ -1282,6 +1282,20 @@
   margin-bottom: 28px;
 }
 
+.patient-modal .request-confirmation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 16px 0 20px;
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 13px 15px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
 .patient-modal .profile-form-actions {
   position: static;
   display: flex;

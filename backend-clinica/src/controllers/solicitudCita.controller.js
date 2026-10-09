@@ -274,9 +274,9 @@ export const confirmarSolicitudCita = async (req, res) => {
     const { pacienteId, odontologoId } = req.body;
     const duracionMinutos = Number(req.body.duracionMinutos ?? 30);
 
-    if (!pacienteId || !odontologoId) {
+    if (!odontologoId) {
       return res.status(400).json({
-        mensaje: 'Debe seleccionar un paciente y un odontólogo.'
+        mensaje: 'Debe seleccionar un odontólogo.'
       });
     }
 
@@ -301,10 +301,34 @@ export const confirmarSolicitudCita = async (req, res) => {
         throw error;
       }
 
-      const paciente = await Paciente.findOne({
-        _id: pacienteId,
-        estado: { $ne: false }
-      }).session(session);
+      let paciente;
+
+      if (pacienteId || solicitud.pacienteId) {
+        paciente = await Paciente.findOne({
+          _id: pacienteId || solicitud.pacienteId,
+          estado: { $ne: false }
+        }).session(session);
+      } else {
+        paciente = await Paciente.findOne({ ci: solicitud.ci }).session(session);
+
+        if (paciente?.estado === false) {
+          const error = new Error(
+            'Ya existe un paciente inactivo con el CI de esta solicitud.'
+          );
+          error.statusCode = 409;
+          throw error;
+        }
+
+        if (!paciente) {
+          [paciente] = await Paciente.create([{
+            nombre: solicitud.nombre,
+            apellido: solicitud.apellido,
+            ci: solicitud.ci,
+            email: normalizarCorreo(solicitud.email),
+            telefono: solicitud.telefono
+          }], { session });
+        }
+      }
 
       if (!paciente) {
         const error = new Error('Paciente no encontrado o inactivo.');

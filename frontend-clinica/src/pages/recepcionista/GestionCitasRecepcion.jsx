@@ -34,9 +34,7 @@ const reprogramacionInicial = {
 };
 
 const confirmacionSolicitudInicial = {
-  pacienteId: '',
-  odontologoId: '',
-  duracionMinutos: 30
+  odontologoId: ''
 };
 
 const GestionCitasRecepcion = () => {
@@ -373,50 +371,10 @@ const GestionCitasRecepcion = () => {
     }
   };
 
-  const buscarPacienteCoincidente = (solicitud) => {
-    const ciSolicitud = String(solicitud.ci || '')
-      .replace(/\s/g, '')
-      .toLowerCase();
-
-    const correoSolicitud = String(solicitud.email || '')
-      .trim()
-      .toLowerCase();
-
-    const telefonoSolicitud = String(solicitud.telefono || '').replace(
-      /\D/g,
-      ''
-    );
-
-    return pacientes.find((paciente) => {
-      const mismoCi =
-        ciSolicitud &&
-        String(paciente.ci || '')
-          .replace(/\s/g, '')
-          .toLowerCase() === ciSolicitud;
-
-      const mismoCorreo =
-        correoSolicitud &&
-        String(paciente.email || '')
-          .trim()
-          .toLowerCase() === correoSolicitud;
-
-      const mismoTelefono =
-        telefonoSolicitud &&
-        String(paciente.telefono || '').replace(/\D/g, '') ===
-          telefonoSolicitud;
-
-      return mismoCi || mismoCorreo || mismoTelefono;
-    });
-  };
-
   const abrirConfirmacionSolicitud = (solicitud) => {
-    const pacienteEncontrado = buscarPacienteCoincidente(solicitud);
-
     setSolicitudConfirmando(solicitud);
     setConfirmacionSolicitud({
-      pacienteId: pacienteEncontrado?._id || '',
-      odontologoId: '',
-      duracionMinutos: 30
+      odontologoId: ''
     });
   };
 
@@ -433,12 +391,7 @@ const GestionCitasRecepcion = () => {
 
       await api.patch(
         `/solicitudes-citas/${solicitudConfirmando._id}/confirmar`,
-        {
-          ...confirmacionSolicitud,
-          duracionMinutos: Number(
-            confirmacionSolicitud.duracionMinutos
-          )
-        }
+        confirmacionSolicitud
       );
 
       cerrarConfirmacionSolicitud();
@@ -1045,26 +998,18 @@ const GestionCitasRecepcion = () => {
               · {solicitudConfirmando.servicio}
             </p>
 
-            <label>Paciente registrado</label>
-            <select
-              value={confirmacionSolicitud.pacienteId}
-              onChange={(evento) =>
-                setConfirmacionSolicitud({
-                  ...confirmacionSolicitud,
-                  pacienteId: evento.target.value
-                })
-              }
-            >
-              <option value="">Seleccionar paciente</option>
-
-              {pacientes
-                .filter((paciente) => paciente.estado !== false)
-                .map((paciente) => (
-                  <option key={paciente._id} value={paciente._id}>
-                    {paciente.nombre} {paciente.apellido} · CI: {paciente.ci}
-                  </option>
-                ))}
-            </select>
+            <div className="request-confirmation-details">
+              <span>CI: {solicitudConfirmando.ci}</span>
+              <span>Teléfono: {solicitudConfirmando.telefono}</span>
+              <span>Correo: {solicitudConfirmando.email}</span>
+              <span>
+                Fecha y hora solicitadas: {fechaBonita(solicitudConfirmando.fecha)} ·{' '}
+                {solicitudConfirmando.hora}
+              </span>
+              {solicitudConfirmando.mensaje && (
+                <span>Observaciones: {solicitudConfirmando.mensaje}</span>
+              )}
+            </div>
 
             <label>Odontólogo</label>
             <select
@@ -1085,21 +1030,7 @@ const GestionCitasRecepcion = () => {
               ))}
             </select>
 
-            <label>Duración</label>
-            <select
-              value={confirmacionSolicitud.duracionMinutos}
-              onChange={(evento) =>
-                setConfirmacionSolicitud({
-                  ...confirmacionSolicitud,
-                  duracionMinutos: Number(evento.target.value)
-                })
-              }
-            >
-              <option value={30}>30 minutos</option>
-              <option value={45}>45 minutos</option>
-              <option value={60}>60 minutos</option>
-              <option value={90}>90 minutos</option>
-            </select>
+            <p>La cita se registrará con una duración de 30 minutos.</p>
 
             <div className="profile-form-actions">
               <button
@@ -1115,7 +1046,6 @@ const GestionCitasRecepcion = () => {
                 type="button"
                 disabled={
                   procesando ||
-                  !confirmacionSolicitud.pacienteId ||
                   !confirmacionSolicitud.odontologoId
                 }
                 onClick={confirmarSolicitud}
